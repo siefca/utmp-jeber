@@ -84,6 +84,10 @@ char *strchr (), *strrchr ();
 # endif
 #endif
 
+#if HAVE_PATHS_H
+# include <paths.h>
+#endif
+
 #include <malloc.h>
 #include <utmp.h>
 #include <fcntl.h>

@@ -2,7 +2,7 @@
 AC_INIT(src/utmp-jeber.h)
 
 PACKAGE=utmp-jeber
-VERSION=1.0.6
+VERSION=1.0.8
 BUGREPORT=siefca@gnu.org
 
 AC_CONFIG_SRCDIR([config.h.in])
@@ -10,6 +10,8 @@ AM_INIT_AUTOMAKE($PACKAGE,$VERSION,$BUGREPORT)
 AM_MAINTAINER_MODE
 
 AH_TEMPLATE(CONSIDER_INIT,Define this if you want init to be treated as possible parent of session processes)
+AH_TEMPLATE(NEED_ROOT,Define this if you want a whole program to need superuser in order to work)
+AH_TEMPLATE(UTMP_NAME,Define this to specify path to the UTMP file)
 
 AM_CONFIG_HEADER([config.h])
 AM_ACLOCAL_INCLUDE(macros)
@@ -37,6 +39,7 @@ AC_CHECK_HEADERS([fcntl.h \
 		  sys/param.h \
 		  termios.h \
 		  unistd.h \
+		  paths.h \
 		  utmp.h])
 
 dnl Checks for typedefs, structures, and compiler characteristics.
@@ -52,7 +55,7 @@ AC_FUNC_STAT
 AC_CHECK_FUNCS([getpgid getopt snprintf strchr memcpy memset])
 AM_CONDITIONAL(HAVE_SNPRINTF,test "x$ac_cv_func_snprintf" = "xyes")
 
-dnl Checks for arguments line conditions
+dnl Checks for arg line conditions
 AC_MSG_CHECKING(whether to treat init process as possible parent of sessions)
 AC_ARG_ENABLE(
     init_as_parent,
@@ -64,6 +67,29 @@ AC_ARG_ENABLE(
 			AC_DEFINE_UNQUOTED(CONSIDER_INIT)
 		fi
 	], AC_MSG_RESULT([no]) )
+
+AC_MSG_CHECKING(whether to need superuser in order to work)
+AC_ARG_ENABLE(
+    need_root,
+    [  --enable-need-root enable program to work only if run by superuser [default=no]], [
+		if test "$enableval" = "no"; then
+			AC_MSG_RESULT([no])
+		else
+			AC_MSG_RESULT([yes])
+			AC_DEFINE_UNQUOTED(NEED_ROOT)
+		fi
+	], AC_MSG_RESULT([no]) )
+
+AC_ARG_WITH(utmp_file,
+[  --with-utmp-file        path to UTMP file
+                           [in most common cases /var/run/utmpx, but may use /var/run/utmp on some systems]],
+with_utmp_file=${withval})
+if test x$with_utmp_file != x ; then
+	jeber_utmp_file="\"$with_utmp_file\""
+else
+	jeber_utmp_file="\"/var/run/utmpx\""
+fi
+AC_DEFINE_UNQUOTED(UTMP_NAME, $jeber_utmp_file)
 
 dnl Export variables
 AC_SUBST(EXTRA_SOURCES)

@@ -4,7 +4,8 @@ sometimes_built_SUBDIRS =
 
 SUBDIRS = $(always_built_SUBDIRS)
 
-EXTRA_DIST = INSTALL README.polish COPYING KOPIOWANIE AUTHORS README NEWS ChangeLog TODO
+FTP_DIST = README README.polish COPYING KOPIOWANIE NEWS INSTALL
+EXTRA_DIST = $(FTP_DIST) AUTHORS ChangeLog TODO CONFIGURE_OPTS
 
 FTP_USER = siewca
 FTP_HOST = team.pld.org.pl
@@ -23,5 +24,5 @@ rpm: Makefile
 ## publish dist on FTP
 publish: Makefile
 	$(MAKE) dist
-	scp $(PACKAGE)-$(VERSION).tar.gz $(EXTRA_DIST) $(FTP_USER)@$(FTP_HOST):$(FTP_DIR)
-	ssh $(FTP_USER)@$(FTP_HOST) "cd $(FTP_DIR) && chmod 0644 $(PACKAGE)-$(VERSION).tar.gz $(EXTRA_DIST)"
+	scp $(PACKAGE)-$(VERSION).tar.gz $(FTP_DIST) $(FTP_USER)@$(FTP_HOST):$(FTP_DIR)
+	ssh $(FTP_USER)@$(FTP_HOST) "cd $(FTP_DIR) && chmod 0644 $(PACKAGE)-$(VERSION).tar.gz $(FTP_DIST)"

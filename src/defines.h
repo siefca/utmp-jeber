@@ -17,25 +17,53 @@
 #endif
 
 #ifndef	VERSION
-#define	VERSION	"1.0.6"
+#define	VERSION	"1.0.8"
 #endif
 
 #define sayg	if (ST.debug) fprintf
 #define	say	if (ST.verb) printf
 #define	log	if (ST.batched) printf
-#define	P_PRE	"/proc"
+
 #define	P_SUF	"fd"
+
+/* procfs mount root */
+
+#ifndef PROC_MOUNT
+# define PROC_MOUNT	"/proc"
+#endif
+
+/* where is the UTMP file? */
+
+#ifndef	UTMP_NAME
+# define UTMP_NAME "/var/run/utmpx"
+#endif
+
+#if HAVE_PATHS_H
+# ifdef _PATH_UTMP
+#  define UTMP_ORG_NAME _PATH_UTMP
+# endif
+#endif
+
+#ifndef UTMP_ORG_NAME
+# define UTMP_ORG_NAME "/var/run/utmp"
+#endif
+
+/* do we need superuser to run? */
+
+#ifdef NEED_ROOT
+# define NEED_SUPERUSER
+#endif
 
 /* consider init proccess as possible parent for user session? */
 
 #ifndef CONSIDER_INIT
-#define	INIT_NOT_PROVIDE
+# define INIT_NOT_PROVIDE
 #endif
 
 /* max search depth while jumping from parent to parent */
 
 #ifndef SRCH_DEEP
-#define	SRCH_DEEP	256
+# define SRCH_DEEP 256
 #endif
 
 /* processes list pointer */

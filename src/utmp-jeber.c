@@ -22,6 +22,8 @@ void show_version();
 void show_legend();
 void show_header();
 void say_used_checks(const char *prefix, const char separator);
+void try_permissions(const char *utmp_org_file,
+		     const char *utmp_file, const char *procroot);
 
 /****************************************/
 
@@ -35,13 +37,7 @@ int main (int argc, char *argv[])
 
     init_settings();
     plist.next = NULL;
-    if (geteuid() != 0)
-    {
-	show_header();
-	fprintf (stderr, "error: must be root to run me!\n");
-	exit(1);
-    }
-
+    
     if (argc > 1)
     while ((x=getopt(argc, argv, "Vhsqdbaijulmntx")) != EOF)
 	{
@@ -104,8 +100,10 @@ int main (int argc, char *argv[])
 	}
 
     postconf_settings();
-
     show_header();
+    try_permissions(UTMP_ORG_NAME, UTMP_NAME, PROC_MOUNT);
+    utmpname(ST.utmp_file);
+
     say("-( scanning processes table: ");
     n_proc = fetch_procs();
     n_orp = n_proc - create_parentship();
@@ -242,6 +240,59 @@ void show_version()
 void show_header()
 {
     say("UTMP Jeber v" VERSION " by Pawel Wilk <siefca@gnu.org> [GNU GPL Licensed]\n");
+}
+
+/****************************************/
+
+void try_permissions(const char *utmp_org_file,
+		     const char *utmp_file, const char *procroot)
+{
+    int have_u_write = 1;
+
+#ifdef NEED_SUPERUSER
+    if (geteuid())
+    {
+	show_header();
+	fprintf (stderr, "error: must be root in order to run me!\n");
+	exit(1);
+    }
+#endif
+    if (access(utmp_file, R_OK))
+    {
+	if (access(utmp_org_file, R_OK))
+	{
+	    fprintf (stderr, "error: cannot read UTMP file (%s)\n", utmp_file);
+	    fprintf (stderr, "error: cannot read UTMP original file (%s)\n", utmp_org_file);
+    	    exit(1);
+	}
+	else
+	{
+	    ST.utmp_file = utmp_org_file;
+	}
+    }
+    else
+    {
+	ST.utmp_file = utmp_file;
+    }
+    
+    if (access(ST.utmp_file, W_OK))
+    {
+        if (!ST.justprint)
+	{
+	    say("-( warning: cannot write UTMP file - fixes disabled\n");
+	    ST.justprint = 1;
+	    have_u_write = 0;
+	}
+    }
+    
+    if (access(procroot, R_OK))
+    {
+	fprintf (stderr, "error: cannot read procfs (%s)\n", procroot);
+	exit(1);
+    }
+
+    sayg(stderr, "[ UTMP file: %s (have write=%d)]\n", ST.utmp_file, have_u_write);
+    sayg(stderr, "[ procfs root: %s]\n", procroot);
 }
 
 /****************************************/

@@ -13,10 +13,13 @@
 
 typedef struct settings
 	{
+	const char *utmp_file;		/* detected name of UTMP file		*/
+	
 	unsigned verb:1;		/* display some info			*/
 	unsigned batched:1;		/* batched output			*/
 	unsigned debug:1;		/* debug mode				*/
 	unsigned justprint:1;		/* do not remove, just inform		*/
+
 	unsigned test_ex:1;		/* login process existance test		*/
 	unsigned test_user:1;		/* user process existance test		*/
 	unsigned test_term:1;		/* terminal ownership test		*/

@@ -1,0 +1,16 @@
+
+* Additional, package specific ./configure arguments:
+
+--enable-init-as-parent
+
+	enable treating init as possible parent of sessions default=no
+
+--enable-need-root
+
+	enable program to work only if run by superuser default=no
+    
+--with-utmp-file path to UTMP file
+
+	in most common cases /var/run/utmpx, but may use /var/run/utmp on some systems
+	note that /var/run/utmp will be checked additionaly, even if not specified here
+

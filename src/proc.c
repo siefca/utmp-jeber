@@ -25,14 +25,14 @@ unsigned long int fetch_procs()
     uid_t uid, euid;
     unsigned int x;
 
-    d = opendir(P_PRE);
+    d = opendir(PROC_MOUNT);
     if (!d) return 0;
 
     current_reset();
     while ((dr=readdir(d)))
     {
 	if (!dr->d_name) continue;
-	snprintf(pathbuf, MAXPATHLEN-2, "%s/%s/status", P_PRE, dr->d_name);
+	snprintf(pathbuf, MAXPATHLEN-2, "%s/%s/status", PROC_MOUNT, dr->d_name);
 	pathbuf[MAXPATHLEN-1] = '\0';
 	f = fopen(pathbuf, "r");
 	if (!f) continue;
@@ -193,7 +193,7 @@ const char * badproc(struct utmp *ut)
 
     if (ST.test_ex)
     {
-	snprintf(pathbuf, MAXPATHLEN-2, "%s/%d", P_PRE, ut->ut_pid);
+	snprintf(pathbuf, MAXPATHLEN-2, "%s/%d", PROC_MOUNT, ut->ut_pid);
 	pathbuf[MAXPATHLEN-1] = '\0';
 	if (access(pathbuf, F_OK)) return reasons[0];
     }
@@ -301,7 +301,7 @@ int termfind (pid_t pid, const char *device)
     struct stat statbuf;
     static char pathbuf[MAXPATHLEN];
 
-    snprintf(pathbuf, MAXPATHLEN-2, "%s/%d/%s", P_PRE, pid, P_SUF);
+    snprintf(pathbuf, MAXPATHLEN-2, "%s/%d/%s", PROC_MOUNT, pid, P_SUF);
     pathbuf[MAXPATHLEN-1] = '\0';
     if (access(pathbuf, F_OK))
     {
@@ -317,7 +317,7 @@ int termfind (pid_t pid, const char *device)
     while ((dr=readdir(d)))
     {
         if (!dr->d_name) continue;
-	snprintf(pathbuf, MAXPATHLEN-2, "%s/%d/%s/%s", P_PRE, pid, P_SUF, dr->d_name);
+	snprintf(pathbuf, MAXPATHLEN-2, "%s/%d/%s/%s", PROC_MOUNT, pid, P_SUF, dr->d_name);
 	pathbuf[MAXPATHLEN-1] = '\0';
 	if (stat(pathbuf, &statbuf) == -1) continue;
 	if (S_ISCHR(statbuf.st_mode))
