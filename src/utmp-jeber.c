@@ -1,10 +1,10 @@
-static const char rcsid[] = "$Id: utmp-jeber.c,v 1.3 2003/02/11 13:24:28 siefca Exp $";
+static const char rcsid[] = "$Id: utmp-jeber.c,v 1.4 2003/02/12 12:21:23 siefca Exp $";
 /* utmp-jeber: remove broken entries from UTMP
  *
  * GNU/Linux program, 
  * Copyright (C) 2003 Pawel Wilk <siefca@gnu.org>,
  *
- * This is free software; see the GNU General Public License version 2
+ * This is free software; see the GNU General Public License PACKAGE_VERSION 2
  * or later for copying conditions.  There is NO warranty.
  *
  */
@@ -19,7 +19,7 @@ static const char rcsid[] = "$Id: utmp-jeber.c,v 1.3 2003/02/11 13:24:28 siefca 
 /****************************************/
 
 void usage(char *n);
-void show_version();
+void show_PACKAGE_VERSION();
 void show_legend();
 void show_header();
 void say_used_checks(const char *prefix, const char separator);
@@ -33,8 +33,9 @@ int main (int argc, char *argv[])
     unsigned long int n_proc, n_orp;
     int c=0;
     char x;
-    const char *r;
+    const char *r, *t;
     struct utmp *utp;
+    struct utmp utw;
 
     init_settings();
     plist.next = NULL;
@@ -45,7 +46,7 @@ int main (int argc, char *argv[])
 		switch (x)
 		    {
 		    case 'V':
-			    show_version();
+			    show_PACKAGE_VERSION();
 			    exit(0);
 			    break;
 		    case 'h':
@@ -120,32 +121,42 @@ int main (int argc, char *argv[])
     while ((utp=getutent()))
     {
 	if (utp->ut_type != USER_PROCESS) continue;
+	t = "none";
 	sayg(stderr, "\n[checking %s on %s]\n", utp->ut_user, utp->ut_line);
 	if ((r=badproc(utp)))
 	{
-	    if (!c) { say("\nbad entries:\n"); }
-	    say(" %d. %s on %s with PID=%d (%s)", c+1, utp->ut_user, utp->ut_line, (unsigned int) utp->ut_pid, r);
-	    log("user=%s tty=/dev/%s pid=%d action=%s reason=%s\n", utp->ut_user,
-		  						utp->ut_line,
-								utp->ut_pid,
-								ST.justprint ? "none" : "removed",
-								r);
+	    if (!c) say("\nbad entries:\n");
 	    c++;
+	    say(" %d. %s on %s with PID=%d (%s)",
+		c,
+		utp->ut_user,
+		utp->ut_line,
+		(unsigned int) utp->ut_pid, r);
 	    if (ST.justprint)
 	    {
 		say("\n");
-		continue;
 	    }
-	    /* da killin' code here */
-	    (void) logout(utp->ut_line);
-	    say(" [removed]\n");
+	    else
+	    {
+		/* da killin' code here */
+		(void) memcpy(&utw, utp, sizeof(struct utmp));
+		utw.ut_type = DEAD_PROCESS;
+		if (pututline(&utw)) t = "removed";
+		else t = "unable to remove";
+		say(" [%s]\n", t);
+	    }
+	    log("user=%s tty=/dev/%s pid=%d action=%s reason=%s\n",
+		utp->ut_user,
+		utp->ut_line,
+		utp->ut_pid,
+		t, r);
 	}
     }
-    if (c) { say("\n"); }
+    if (c) say("\n");
     endutent();
+
     say("-( scanning completed\n");
     destroy_list();
-    
     exit(0);
 }
 
@@ -161,7 +172,7 @@ void usage(char *n)
 	    "\t-h  show this screen\n"
 	    "\t-s  show short legend of available checks\n"
 	    "\t-q  enable quiet mode\n"
-	    "\t-V  show version and copying information\n\n"
+	    "\t-V  show PACKAGE_VERSION and copying information\n\n"
 	    "* workmode options:\n"
 	    "\t-a  perform all safe checks (default)\n"
 	    "\t-i  processes inheritance check\n"
@@ -217,14 +228,14 @@ void show_legend()
 
 /****************************************/
 
-void show_version()
+void show_PACKAGE_VERSION()
 {
-    printf("This is UTMP Jeber, version " VERSION "\n"
+    printf("This is UTMP Jeber, version " PACKAGE_VERSION "\n"
 	   "This program is Copyright (c) 2003 by Pawel Wilk <siefca@gnu.org>\n\n"
 	    "This program is free software; you can redistribute it and/or modify\n"
 	    "it under the terms of the GNU General Public License as published by\n"
-	    "the Free Software Foundation; either version 2 of the License, or\n"
-	    "(at your option) any later version.\n\n"
+	    "the Free Software Foundation; either PACKAGE_VERSION 2 of the License, or\n"
+	    "(at your option) any later PACKAGE_VERSION.\n\n"
 	    "This program is distributed in the hope that it will be useful,\n"
 	    "but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
 	    "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
@@ -240,7 +251,7 @@ void show_version()
 
 void show_header()
 {
-    say("UTMP Jeber v" VERSION " by Pawel Wilk <siefca@gnu.org> [GNU GPL Licensed]\n");
+    say("UTMP Jeber v" PACKAGE_VERSION " by Pawel Wilk <siefca@gnu.org> [GNU GPL Licensed]\n");
 }
 
 /****************************************/

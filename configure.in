@@ -1,10 +1,10 @@
 # Process this file with autoconf to produce a configure script.
-AC_INIT(src/utmp-jeber.h)
+AC_INIT(utmp-jeber,1.0.10,siefca@gnu.org)
 
-PACKAGE=utmp-jeber
-VERSION=1.0.9
+PACKAGE=$PACKAGE_NAME
+VERSION=$PACKAGE_VERSION
 RELEASE=1
-BUGREPORT=siefca@gnu.org
+BUGREPORT=$PACKAGE_BUGREPORT
 SUMMARY="Print and optionally remove broken UTMP entries"
 
 AC_SUBST(RELEASE)
@@ -30,9 +30,6 @@ AC_PROG_RANLIB
 AC_ISC_POSIX
 AC_PROG_LN_S
 AC_CANONICAL_HOST
-
-dnl Checks for libraries.
-AC_CHECK_LIB(util, logout)
 
 dnl Checks for header files.
 AC_HEADER_DIRENT

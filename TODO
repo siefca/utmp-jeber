@@ -1,4 +1,2 @@
-- write a simple cron script and a logfile and put it into subpackage
-- write README in english
 - write the manual pages
 - remove -lutil(logout), do entry removal by hand

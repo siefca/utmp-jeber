@@ -13,11 +13,11 @@
 #define DEFINES_H
 
 #ifdef	HAVE_CONFIG_H
-#include "config.h"
+# include "config.h"
 #endif
 
-#ifndef	VERSION
-#define	VERSION	"1.0.8"
+#ifndef	PACKAGE_VERSION
+# define PACKAGE_VERSION "(unknown)"
 #endif
 
 #define sayg	if (ST.debug) fprintf

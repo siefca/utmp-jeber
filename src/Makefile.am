@@ -34,4 +34,3 @@ else
 endif
 
 EXTRA_DIST = $(utmp_jeber_SNPRINTF)
-

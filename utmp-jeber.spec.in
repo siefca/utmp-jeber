@@ -1,4 +1,4 @@
-# $Revision: 1.4 $, $Date: 2003/02/11 15:59:59 $
+# $Revision: 1.5 $, $Date: 2003/02/12 12:21:22 $
 Summary:	@SUMMARY@
 Summary(pl):	Wy¶wietl i opcjonalnie usuñ wadliwe wpisy UTMP
 Name:		@PACKAGE@
@@ -14,7 +14,7 @@ Buildroot:	/tmp/%{name}-%{version}-root-%(id -u -n)
 
 %description
 UTMP Jeber is a small tool which prints broken entries found in UTMP.
-It has a few various methods of process analysis, which you can select
+It has various methods of process analysis, which you can select
 using command line arguments. It optionally removes broken entries. 
 
 %description -l pl
