@@ -34,27 +34,21 @@ rpm: Makefile
 	rpm -ta --clean $(TAR_GZ)
 
 ## publish dist on FTP
-ftp-publish: Makefile
-	$(MAKE) rpm
+ftp-publish: Makefile rpm
 	scp $(TAR_GZ) $(HOME)/rpm/SRPMS/$(SRC_RPM) $(FTP_DIST) $(FTP_USER)@$(FTP_HOST):$(FTP_DIR)
 	ssh $(FTP_USER)@$(FTP_HOST) "cd $(FTP_DIR) && rm -f CURRENT_IS* *-current.* ; touch CURRENT_IS_$(VERSION) ; ln -s $(TAR_GZ) $(CUR_GZ) ; ln -s $(SRC_RPM) $(CUR_SRPM)"
 	ssh $(FTP_USER)@$(FTP_HOST) "cd $(FTP_DIR) && chmod 0644 $(TAR_GZ) $(FTP_DIST) $(SRC_RPM) CURRENT_IS*"
 
 ## WWW
-www: Makefile
-	$(MAKE) dist
-	$(MAKE) rpm
+www: Makefile rpm
 	mv html-template $(WEB_LOCALDIR)/index.html
 	cp $(TAR_GZ) $(WEB_LOCALDIR)
 	cp $(HOME)/rpm/SRPMS/$(SRC_RPM) $(WEB_LOCALDIR)
 
 ## publish dist on WWW
-www-publish: Makefile
-	$(MAKE) www
+www-publish: Makefile www
 	cd $(WEB_LOCALDIR) && scp *.html *.tar.gz *.src.rpm $(WWW_USER)@$(WWW_HOST):$(WWW_DIR)
 	ssh $(WWW_USER)@$(WWW_HOST) "cd $(WWW_DIR) && chmod 0644 *"
 
 ## publish both, on WWW and FTP
-publish: Makefile
-	$(MAKE) ftp-publish
-	$(MAKE) www-publish
+publish: Makefile www ftp-publish www-publish
