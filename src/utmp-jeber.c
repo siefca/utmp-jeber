@@ -1,10 +1,10 @@
-static const char rcsid[] = "$Id: utmp-jeber.c,v 1.4 2003/02/12 12:21:23 siefca Exp $";
+static const char rcsid[] = "$Id: utmp-jeber.c,v 1.5 2003/02/12 13:07:38 siefca Exp $";
 /* utmp-jeber: remove broken entries from UTMP
  *
  * GNU/Linux program, 
  * Copyright (C) 2003 Pawel Wilk <siefca@gnu.org>,
  *
- * This is free software; see the GNU General Public License PACKAGE_VERSION 2
+ * This is free software; see the GNU General Public License version 2
  * or later for copying conditions.  There is NO warranty.
  *
  */
@@ -19,7 +19,7 @@ static const char rcsid[] = "$Id: utmp-jeber.c,v 1.4 2003/02/12 12:21:23 siefca 
 /****************************************/
 
 void usage(char *n);
-void show_PACKAGE_VERSION();
+void show_version();
 void show_legend();
 void show_header();
 void say_used_checks(const char *prefix, const char separator);
@@ -46,7 +46,7 @@ int main (int argc, char *argv[])
 		switch (x)
 		    {
 		    case 'V':
-			    show_PACKAGE_VERSION();
+			    show_version();
 			    exit(0);
 			    break;
 		    case 'h':
@@ -172,7 +172,7 @@ void usage(char *n)
 	    "\t-h  show this screen\n"
 	    "\t-s  show short legend of available checks\n"
 	    "\t-q  enable quiet mode\n"
-	    "\t-V  show PACKAGE_VERSION and copying information\n\n"
+	    "\t-V  show version and copying information\n\n"
 	    "* workmode options:\n"
 	    "\t-a  perform all safe checks (default)\n"
 	    "\t-i  processes inheritance check\n"
@@ -228,14 +228,14 @@ void show_legend()
 
 /****************************************/
 
-void show_PACKAGE_VERSION()
+void show_version()
 {
     printf("This is UTMP Jeber, version " PACKAGE_VERSION "\n"
 	   "This program is Copyright (c) 2003 by Pawel Wilk <siefca@gnu.org>\n\n"
 	    "This program is free software; you can redistribute it and/or modify\n"
 	    "it under the terms of the GNU General Public License as published by\n"
-	    "the Free Software Foundation; either PACKAGE_VERSION 2 of the License, or\n"
-	    "(at your option) any later PACKAGE_VERSION.\n\n"
+	    "the Free Software Foundation; either version 2 of the License, or\n"
+	    "(at your option) any later version.\n\n"
 	    "This program is distributed in the hope that it will be useful,\n"
 	    "but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
 	    "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
