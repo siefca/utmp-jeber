@@ -66,9 +66,10 @@
  </P>
  <P CLASS="cytat">
     <UL>
-	<LI> 1.0.9 - added cron script and rpm subpackage for it
-	<LI> 1.0.8 - first official release
-	<LI> 1.0.6 - initial release on PLD's CVS
+	<LI> 1.0.10 - libutil no longer needed, added english README
+	<LI> 1.0.9  - added cron script and rpm subpackage for it
+	<LI> 1.0.8  - first official release
+	<LI> 1.0.6  - initial release on PLD's CVS
     </UL>
  </P>
 </TD></TR>
@@ -81,8 +82,8 @@
     <UL>
 	<LI> <A HREF="README">view README</A>
 	<LI> <A HREF="README.polish">view README.polish</A>
-	<LI> <A HREF="jeber.png">view screenshot</A>
 	<LI> <A HREF="COPYING">view COPYING</A>
+	<LI> <A HREF="jeber.png">view screenshot</A>
     </UL>
  </P>
 </TD></TR>
@@ -153,6 +154,6 @@
 <HR>
 <FONT FACE="fixed" SIZE="-2" COLOR="#ff1111">
 Pawe³ Wilk
-<PRE>($Id: html-template.in,v 1.7 2003/02/11 17:17:53 siefca Exp $)</PRE>
+<PRE>($Id: html-template.in,v 1.8 2003/02/12 12:32:00 siefca Exp $)</PRE>
 </BODY>
 </HTML>
