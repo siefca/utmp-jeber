@@ -1,4 +1,4 @@
-static const char rcsid[] = "$Id: proc.c,v 1.5 2003/02/14 22:30:48 siefca Exp $";
+static const char rcsid[] = "$Id: proc.c,v 1.6 2003/02/19 14:20:17 siefca Exp $";
 
 /* utmp-jeber: remove broken entries from UTMP
  *
@@ -66,9 +66,10 @@ unsigned long int fetch_procs()
 
 /****************************************/
 
-int check_perm_foreign_process(uid_t my_uid)
+int check_perm_foreign_process(uid_t my_uid, unsigned int min_hits)
 {
-  int x;
+  int x=0;
+  unsigned int hit_counter=0;
   pid_t pid;
   uid_t uid, euid;
   FILE *f;
@@ -120,7 +121,7 @@ int check_perm_foreign_process(uid_t my_uid)
 	       (unsigned int) pid);
 	  x = termfind(pid, NULL);
 	  if (x == TERMFIND_NO_CHAR || x == TERMFIND_NO_PROC) continue;
-	  if (x == TERMFIND_OK)
+	  if (x == TERMFIND_OK && hit_counter++ >= min_hits)
 	    {
 	      sayg(stderr, "[termfind(): can check foreign descriptors]\n");
 	      closedir(d);
@@ -415,7 +416,7 @@ int termfind (pid_t pid, const char *device)
 	      c = linkbuf; /* got name */
 	      if (c)
 		{
-		  sayg(stderr, " (pid %d passed checkmode at termfind()) ", pid);
+		  sayg(stderr, " (pid %d passed readlink at termfind()) ", pid);
 		  closedir(d);
 		  return TERMFIND_OK;
 		}
@@ -428,12 +429,13 @@ int termfind (pid_t pid, const char *device)
 		  /* need only readable character device   */
 		  /* so it's not necessary to do ttyname() */
 		  /* it's even not recommended..           */
-		  sayg(stderr, " (pid %d passed checkmode at termfind()) ", pid);
+		  sayg(stderr, " (pid %d passed half-ttyname at termfind()) ", pid);
 		  closedir(d);
 		  return TERMFIND_OK;
 	        }
 	      c = ttyname(f); /* got name */
 	      close(f);
+	      sayg(stderr, " (pid %d passed ttyname at termfind()) ", pid);
 	    }
 
 	  if (c) /* have some terminal */

@@ -1,3 +1,4 @@
+1.0.12 - preliminary access checks were enhanced
 1.0.11 - added preliminary access checks
 1.0.10 - libutil no longer needed
 1.0.9  - added cron script and rpm subpackage for it

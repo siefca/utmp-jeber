@@ -24,12 +24,16 @@
 #define	say	if (ST.verb) printf
 #define	log	if (ST.batched) printf
 
-#define	P_SUF	"fd"
-
 /* procfs mount root */
 
 #ifndef PROC_MOUNT
-# define PROC_MOUNT	"/proc"
+# define PROC_MOUNT "/proc"
+#endif
+
+/* procfs file descriptors subdirectory */
+
+#ifndef P_SUF
+# define P_SUF "fd"
 #endif
 
 /* where is the UTMP file? */
@@ -64,6 +68,12 @@
 
 #ifndef SRCH_DEEP
 # define SRCH_DEEP 256
+#endif
+
+/* minimum number of hits when checking access to fds' */
+
+#ifndef MIN_FD_CHECKS
+# define MIN_FD_CHECKS 8
 #endif
 
 /* processes list pointer */

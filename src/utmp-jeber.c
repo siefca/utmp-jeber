@@ -1,4 +1,4 @@
-static const char rcsid[] = "$Id: utmp-jeber.c,v 1.7 2003/02/14 22:30:48 siefca Exp $";
+static const char rcsid[] = "$Id: utmp-jeber.c,v 1.8 2003/02/19 14:20:17 siefca Exp $";
 
 /* utmp-jeber: remove broken entries from UTMP
  *
@@ -320,7 +320,7 @@ void try_permissions(const char *utmp_org_file,
       exit(1);
     }
 
-  if (!check_perm_foreign_process(my_uid))
+  if (!check_perm_foreign_process(my_uid, MIN_FD_CHECKS))
     {
 	say("-( WARNING: cannot check terminal lines due to access restrictions\n"
 	    "-(          terminal line checks are now DISABLED\n");

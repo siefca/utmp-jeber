@@ -21,7 +21,7 @@
 
 int termfind (pid_t pid, const char *device);
 
-int check_perm_foreign_process(uid_t my_uid);
+int check_perm_foreign_process(uid_t my_uid, unsigned int min_hits);
 
 int check_proc(char *username, pid_t startproc, int level, const char *device);
 int check_proc_pgid(char *username, pid_t startproc, int level, const char *device);
