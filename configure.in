@@ -3,7 +3,7 @@ AC_INIT(src/utmp-jeber.h)
 
 PACKAGE=utmp-jeber
 VERSION=1.0.8
-RELEASE=2
+RELEASE=3
 BUGREPORT=siefca@gnu.org
 SUMMARY="Print and optionally remove broken UTMP entries"
 
