@@ -1,0 +1,129 @@
+
+Rzuci³a ciê dziewczyna? ¯ona odesz³a? Kumpel ciê wkurwi³?
+		
+Usun±³e¶ im konta i zabi³e¶ wszystkie ich procesy. Dobrze.
+Lecz dobija ciê, ¿e nadal ich loginy strasz±, gdy napiszesz
+'w' lub 'finger'..
+
+Nic prostszego!
+U¿yj UTMP Jebera i raz na zawsze wyjeb ich ze swego systemu i ¿ycia!
+
+* UTMP Jeber - co to?
+
+ Jest to proste narzêdzie, które wyszukuje podejrzane wpisy w pliku UTMP.
+ Narzêdzie powsta³o w wyniku oddzia³ywania frustracji u¿ytkowników.
+ U¿ytkownicy s± sfrustrowani, gdy po tym jak znikn± z systemu
+ (np. z powodu zerwanej ³±czno¶ci lub sygna³u do procesu) s±
+ nadal widoczni w systemie, chocia¿ to ca³kiem nieprawda.
+
+ U¿ytkownicy denerwuj± siê, poniewa¿ wprowadza to w b³±d innych
+ u¿ytkowników, tak¿e niektóre systemy korzystaj± z utmp, ¿eby
+ okre¶liæ liczbê maksymalnych sesji. U¿ytkownicy, którzy s±
+ sfrustrowani i denerwuj± siê maj± w zwyczaju nadu¿ywaæ polecenia
+ 'talk root' i/lub 'mail root' i aby temu zapobiec powsta³ ten program.
+
+* Co robi UTMP Jeber?
+
+ UTMP Jeber czyta sobie procfs i wytwarza w pamiêci drzewo
+ odzwierciedlaj±ce hierarchiê procesów systemu. Potem analizuje
+ plik UTMP i sprawdza aktualno¶æ ka¿dego znalezionego wpisu
+ wzglêdem zebranych wcze¶niej informacji o procesach.
+ Gdy napotka jaki¶ b³±d to zg³asza go i opcjonalnie usuwa
+ popsuty wpis z UTMP.
+ 
+ Jeber ma kilka sposobów na sprawdzenie wa¿no¶ci informacji
+ znalezionych w UTMP. Te najlepsze w praktyce s± stosowane
+ automatycznie.
+ 
+ Aby zobaczyæ mo¿liwe sposoby testowania i inne opcje
+ napisz w linii poleceñ: utmp-jeber -h
+
+* Metody sprawdzania wa¿no¶ci
+
+ nazwa:		l-seek
+ domy¶lnie:	tak
+ poziom:	bezpieczna
+ opis:		sprawdzane jest czy istnieje proces
+		loginowy, którego PID znaleziono w UTMP
+
+-------------------------------------------------------------
+
+ nazwa:		u-seek
+ domy¶lnie:	tak
+ poziom:	neutralna
+ opis:		sprawdzane jest czy istnieje jakikolwiek
+		proces u¿ytkownika znalezionego w UTMP
+		
+		metoda nie jest polecana jako samodzielny
+		test, poniewa¿ mo¿e nie wykazaæ b³êdnych
+		wpisów
+
+-------------------------------------------------------------
+
+ nazwa:		pgid-check
+ domy¶lnie:	nie
+ poziom:	niebezpieczna
+ opis:		sprawdzane jest czy istniej± procesy,
+		które maj± taki PGID jak PID procesu
+		loginowego wczytany z wpisu UTMP,
+		lub jak PID pierwszego jego potomka
+		metoda nie jest polecana, poniewa¿
+		mo¿e sugerowaæ usuniêcie poprawnych
+		wpisów
+
+-------------------------------------------------------------
+		
+ nazwa:		pgid+line-check
+ domy¶lnie:	nie
+ poziom:	bardzo niebezpieczna
+ opis:		sprawdzane jest czy istniej± procesy,
+		które maj± taki PGID jak PID procesu
+		loginowego wczytany z wpisu UTMP,
+		lub jak PID pierwszego jego potomka,
+		a dodatkowo czy nazwa urz±dzenia
+		linii terminala zgadza siê z nazw±
+		umieszczon± we wpisie UTMP
+
+		metoda nie jest polecana, poniewa¿
+		mo¿e sugerowaæ usuniêcie poprawnych
+		wpisów
+
+-------------------------------------------------------------
+
+ nazwa:		inherit-check
+ domy¶lnie:	nie
+ poziom:	bezpieczna
+ opis:		sprawdzane jest czy istniej± procesy,
+		które s± potomkami procesu loginowego
+		w tym celu analizowana jest ¶cie¿ka
+		dziedziczenia procesów
+
+-------------------------------------------------------------
+
+ nazwa:		inherit+line-check
+ domy¶lnie:	tak
+ poziom:	bezpieczna
+ opis:		sprawdzane jest czy istniej± procesy,
+		które s± potomkami procesu loginowego
+		w tym celu analizowana jest ¶cie¿ka
+		dziedziczenia procesów, dodatkowo
+		sprawdzane jest czy nazwa urz±dzenia
+		linii terminala zgadza siê z nazw±
+		umieszczon± we wpisie UTMP
+
+-------------------------------------------------------------
+
+ nazwa:		line-check
+ domy¶lnie:	nie
+ poziom:	neutralna
+ opis:		sprawdzane jest czy istniej± procesy,
+		których jakie¶ otwarte deskryptory s±
+		skojarzone z urz±dzeniem terminala
+		wymienionym we wpisie UTMP
+ 
+		u¿ycie tylko tej metody jako jedynej
+		nie jest polecane, poniewa¿ niektóre
+		wadliwe wpisy mog± pozostaæ
+
+-------------------------------------------------------------
+
