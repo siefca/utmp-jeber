@@ -3,7 +3,7 @@ AC_INIT(src/utmp-jeber.h)
 
 PACKAGE=utmp-jeber
 VERSION=1.0.8
-RELEASE=1
+RELEASE=2
 BUGREPORT=siefca@gnu.org
 SUMMARY="Print and optionally remove broken UTMP entries"
 
@@ -102,6 +102,7 @@ AC_SUBST(EXTRA_SOURCES)
 AC_OUTPUT([
 	    utmp-jeber.spec
 	    html-template
+	    utmp-jeber.cron
 	    Makefile
 	    macros/Makefile
     	    src/Makefile

@@ -1,3 +1,4 @@
+static const char rcsid[] = "$Id: pgid.c,v 1.3 2003/02/11 13:24:28 siefca Exp $";
 /* utmp-jeber: remove broken entries from UTMP
  *
  * GNU/Linux program, 

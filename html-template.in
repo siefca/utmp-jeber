@@ -118,7 +118,6 @@
 <LI> <A HREF="ftp://ftp.wsisiz.edu.pl/pub/Linux/PLD/software/utmp-jeber/">ftp://ftp.wsisiz.edu.pl/pub/Linux/PLD/software/utmp-jeber/</A> - WSISIZ, Warsaw, Poland
 <LI> <A HREF="ftp://ftp.task.gda.pl/pub/linux/PLD/software/utmp-jeber/">ftp://ftp.task.gda.pl/pub/linux/PLD/software/utmp-jeber/</A> - TASK, Gdansk, Poland
 <LI> <A HREF="ftp://ftp.pld.kernel.pl/software/utmp-jeber/">ftp://ftp.pld.kernel.pl/software/utmp-jeber/</A> - ICM, Warsaw, Poland
-<LI> <A HREF="ftp://ftp.futuro.pl/pub/distributions/PLD/software/utmp-jeber/">ftp://ftp.futuro.pl/pub/distributions/PLD/software/utmp-jeber/</A> - ProFuturo, Lublin, Poland
 <LI> <A HREF="ftp://ftp.rpmfind.net/linux/PLD/current/software/utmp-jeber/">ftp://ftp.rpmfind.net/linux/PLD/current/software/utmp-jeber/</A> - MIT, Boston, USA
 <LI> <A HREF="ftp://fr.rpmfind.net/linux/PLD/current/software/utmp-jeber/">ftp://fr.rpmfind.net/linux/PLD/current/software/utmp-jeber/</A> - INRIA Rhone-Alpes, Montbonnot, France
 <LI> <A HREF="ftp://fr2.rpmfind.net/linux/PLD/software/utmp-jeber/">ftp://fr2.rpmfind.net/linux/PLD/software/utmp-jeber/</A> - Creatis/CISM, Lyon, France
@@ -152,6 +151,6 @@
 <BR>&nbsp;<BR>
 <HR>
 <FONT FACE="fixed" SIZE="-2" COLOR="#ff1111">
-Pawe³ Wilk
+Pawe³ Wilk <PRE>            ($Id: html-template.in,v 1.5 2003/02/11 13:24:23 siefca Exp $)  </PRE>
 </BODY>
 </HTML>

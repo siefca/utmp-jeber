@@ -1,3 +1,4 @@
+static const char rcsid[] = "$Id: utmp-jeber.c,v 1.3 2003/02/11 13:24:28 siefca Exp $";
 /* utmp-jeber: remove broken entries from UTMP
  *
  * GNU/Linux program, 
@@ -124,11 +125,11 @@ int main (int argc, char *argv[])
 	{
 	    if (!c) { say("\nbad entries:\n"); }
 	    say(" %d. %s on %s with PID=%d (%s)", c+1, utp->ut_user, utp->ut_line, (unsigned int) utp->ut_pid, r);
-	    log("utmp-jeber: user=%s tty=/dev/%s pid=%d action=%s reason=%s\n", utp->ut_user,
-										utp->ut_line,
-										utp->ut_pid,
-										ST.justprint ? "none" : "removed",
-										r);
+	    log("user=%s tty=/dev/%s pid=%d action=%s reason=%s\n", utp->ut_user,
+		  						utp->ut_line,
+								utp->ut_pid,
+								ST.justprint ? "none" : "removed",
+								r);
 	    c++;
 	    if (ST.justprint)
 	    {
