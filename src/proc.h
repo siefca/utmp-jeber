@@ -14,7 +14,10 @@
 
 #include "includes.h"
 
+#define TERMFIND_NO_PROC 2
+
 int termfind (pid_t pid, const char *device);
+int check_perm_foreign_process(uid_t my_uid);
 int check_proc(char *username, pid_t startproc, int level, const char *device);
 int check_proc_pgid(char *username, pid_t startproc, int level, const char *device);
 int check_terminal_owner(const char *username, const char *device, pid_t startproc);
