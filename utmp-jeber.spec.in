@@ -1,0 +1,52 @@
+# $Revision: 1.1 $, $Date: 2003/02/10 15:56:36 $
+Summary:	Print and optionally remove broken UTMP entries
+Summary(pl):	Wy¶wietl i opcjonalnie usuñ wadliwe wpisy UTMP
+Name:		@PACKAGE@
+Version:	@VERSION@
+Release:	@RELEASE@
+Copyright:	GPL
+Group:		Applications/System
+Source:		ftp://ftp.pld.org.pl/software/utmp-jeber/%{name}-%{version}.tar.gz
+URL:		http://utmp-jeber.pld.org.pl/
+BuildRequires:	autoconf
+BuildRequires:	automake
+Buildroot:	/tmp/%{name}-%{version}-root-%(id -u -n)
+
+%description
+UTMP Jeber is a small tool which prints broken entries found in UTMP.
+It has a few various methods of process analysis, which you can select
+using command line arguments. It optionally removes broken entries.
+
+%description -l pl
+UTMP Jeber to ma³e narzêdzie, które wy¶wietla uszkodzone wpisy
+znalezione w UTMP. Posiada ono parê metod analizowania procesów,
+a ich wyboru mo¿esz dokonaæ u¿ywaj±c argumentów linii poleceñ.
+Jeber opcjonalnie potrafi usuwaæ uszkodzone wpisy.
+
+%prep
+%setup -q -n %{name}-%{version}
+
+%build
+%{__aclocal}
+%{__autoconf}
+%{__automake}
+%{__autoheader}
+%configure --with-utmp-file=/var/run/utmpx
+
+%install
+rm -rf $RPM_BUILD_ROOT
+%{__make} install DESTDIR=$RPM_BUILD_ROOT
+install -d $RPM_BUILD_ROOT%{_bindir}
+
+%clean
+rm -rf $RPM_BUILD_ROOT
+
+%files
+%defattr(644,root,root,755)
+%doc README README.polish ChangeLog NEWS AUTHORS KOPIOWANIE COPYING
+%attr(755,root,root) %{_bindir}/*
+
+%define date	%(echo `LC_ALL="C" date +"%a %b %d %Y"`)
+%changelog
+* %{date} PLD Team <feedback@pld.org.pl>
+All persons listed below can be reached at <cvs_login>@pld.org.pl

@@ -3,8 +3,10 @@ AC_INIT(src/utmp-jeber.h)
 
 PACKAGE=utmp-jeber
 VERSION=1.0.8
+RELEASE=1
 BUGREPORT=siefca@gnu.org
 
+AC_SUBST(RELEASE)
 AC_CONFIG_SRCDIR([config.h.in])
 AM_INIT_AUTOMAKE($PACKAGE,$VERSION,$BUGREPORT)
 AM_MAINTAINER_MODE
@@ -14,7 +16,7 @@ AH_TEMPLATE(NEED_ROOT,Define this if you want a whole program to need superuser 
 AH_TEMPLATE(UTMP_NAME,Define this to specify path to the UTMP file)
 
 AM_CONFIG_HEADER([config.h])
-AM_ACLOCAL_INCLUDE(macros)
+#AM_ACLOCAL_INCLUDE(macros)
 
 dnl Checks for programs.
 AC_PROG_CC
@@ -94,7 +96,9 @@ AC_DEFINE_UNQUOTED(UTMP_NAME, $jeber_utmp_file)
 dnl Export variables
 AC_SUBST(EXTRA_SOURCES)
 
-AC_CONFIG_FILES([Makefile \
-		 macros/Makefile \
-                 src/Makefile])
-AC_OUTPUT
+AC_OUTPUT([
+	    utmp-jeber.spec
+	    Makefile
+	    macros/Makefile
+    	    src/Makefile
+	 ])

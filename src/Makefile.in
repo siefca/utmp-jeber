@@ -75,6 +75,7 @@ LN_S = @LN_S@
 MAINT = @MAINT@
 PACKAGE = @PACKAGE@
 RANLIB = @RANLIB@
+RELEASE = @RELEASE@
 STRIP = @STRIP@
 VERSION = @VERSION@
 am__include = @am__include@

@@ -1,2 +1,3 @@
 - write the manual pages
+- remove -lutil(logout), do removal by hand
 - make spec
