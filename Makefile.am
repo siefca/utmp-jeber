@@ -2,8 +2,6 @@ always_built_SUBDIRS = src macros
 sometimes_built_SUBDIRS = 
 SUBDIRS		= $(always_built_SUBDIRS)
 
-WEB_LOCALDIR	= www
-WEB_DIST	= $(PACKAGE).html $(PACKAGE).html.in
 SPEC_DIST	= $(PACKAGE).spec $(PACKAGE).spec.in
 FTP_DIST	= README README.polish COPYING KOPIOWANIE NEWS INSTALL
 EXTRA_DIST	= $(FTP_DIST) $(SPEC_DIST) AUTHORS ChangeLog TODO CONFIGURE_OPTS
@@ -20,6 +18,9 @@ TAR_GZ		= $(PACKAGE)-$(VERSION).tar.gz
 CUR_GZ		= $(PACKAGE)-current.tar.gz
 SRC_RPM		= $(PACKAGE)-$(VERSION)-$(RELEASE).src.rpm
 CUR_SRPM	= $(PACKAGE)-current.src.rpm
+
+WEB_LOCALDIR	= www
+WEB_DIST	= index.html README README.polish $(TAR_GZ) $(SRC_RPM)
 
 CLEANFILES	= *~
 
@@ -47,15 +48,16 @@ mirrors: Makefile
 	| awk '{print "<LI> <A HREF=\""$$1"software/$(PACKAGE)/\">"$$1"software/$(PACKAGE)/<\A>"}' > mirror-list
 
 ## WWW
-www: Makefile rpm
+www: Makefile
 	@cp html-template $(WEB_LOCALDIR)/index.html
+	@cp README* $(WEB_LOCALDIR)
 	@cp $(TAR_GZ) $(WEB_LOCALDIR)
 	@cp $(HOME)/rpm/SRPMS/$(SRC_RPM) $(WEB_LOCALDIR)
 
 ## publish dist on WWW
 www-publish: Makefile www
 	@echo Publishing Web Page..
-	@cd $(WEB_LOCALDIR) && scp *.html *.tar.gz *.src.rpm $(WWW_USER)@$(WWW_HOST):$(WWW_DIR)
+	@cd $(WEB_LOCALDIR) && scp $(WEB_DIST) $(WWW_USER)@$(WWW_HOST):$(WWW_DIR)
 	@ssh $(WWW_USER)@$(WWW_HOST) "cd $(WWW_DIR) && chmod 0644 *"
 
 ## publish both, on WWW and FTP

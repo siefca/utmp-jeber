@@ -74,6 +74,18 @@
 
 <TR><TD bgcolor="#404040">
  <P CLASS="uszko">
+    README
+ </P>
+ <P CLASS="cytat">
+    <UL>
+	<LI> <A HREF="README">view README</A>
+	<LI> <A HREF="README.polish">view README.polish</A>
+    </UL>
+ </P>
+</TD></TR>
+
+<TR><TD bgcolor="#404040">
+ <P CLASS="uszko">
     DOWNLOAD
  </P>
  <P CLASS="cytat">
@@ -109,7 +121,7 @@
 <LI> <A HREF="ftp://fr.rpmfind.net/linux/PLD/current/software/utmp-jeber/">ftp://fr.rpmfind.net/linux/PLD/current/software/utmp-jeber/</A> - INRIA Rhone-Alpes, Montbonnot, France
 <LI> <A HREF="ftp://fr2.rpmfind.net/linux/PLD/software/utmp-jeber/">ftp://fr2.rpmfind.net/linux/PLD/software/utmp-jeber/</A> - Creatis/CISM, Lyon, France
 <LI> <A HREF="ftp://gd.tuwien.ac.at/opsys/linux/PLD/software/utmp-jeber/">ftp://gd.tuwien.ac.at/opsys/linux/PLD/software/utmp-jeber/</A> - TUW, Wien, Austria
-<LI> <A HREF="http://gd.tuwien.ac.at/opsys/linux/PLD/software/utmp-jeber/">http://gd.tuwien.ac.at/opsys/linux/PLD/software/utmp-jeber/</A> - TUW, Wien, Austria (WWW)
+<LI> <A HREF="http://gd.tuwien.ac.at/opsys/linux/PLD/software/utmp-jeber/">http://gd.tuwien.ac.at/opsys/linux/PLD/software/utmp-jeber/</A> - TUW, Wien, Austria (HTTP)
 <LI> <A HREF="ftp://spirit.profinet.sk/mirrors/PLD/software/utmp-jeber/">ftp://spirit.profinet.sk/mirrors/PLD/software/utmp-jeber/</A> - Prof-I-Net, Bratislava, Slovakia
     </UL>
  </P>
