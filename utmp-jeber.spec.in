@@ -1,4 +1,4 @@
-# $Revision: 1.3 $, $Date: 2003/02/11 13:24:23 $
+# $Revision: 1.4 $, $Date: 2003/02/11 15:59:59 $
 Summary:	@SUMMARY@
 Summary(pl):	Wy¶wietl i opcjonalnie usuñ wadliwe wpisy UTMP
 Name:		@PACKAGE@
@@ -58,6 +58,8 @@ jest co godzinê uruchamiany przy u¿yciu demona cron.
 rm -rf $RPM_BUILD_ROOT
 %{__make} install DESTDIR=$RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_bindir}
+install -d $RPM_BUILD_ROOT/etc/cron.hourly
+cp -f %{name}.cron $RPM_BUILD_ROOT/etc/cron.hourly/%{name}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -69,7 +71,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files cron
 %defattr(644,root,root,755)
-%attr(755,root,root) /etc/cron.hourly/%{name}.cron
+%attr(755,root,root) /etc/cron.hourly/%{name}
 
 %define date	%(echo `LC_ALL="C" date +"%a %b %d %Y"`)
 %changelog
