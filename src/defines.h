@@ -73,7 +73,7 @@
 /* minimum number of hits when checking access to fds' */
 
 #ifndef MIN_FD_CHECKS
-# define MIN_FD_CHECKS 8
+# define MIN_FD_CHECKS 4
 #endif
 
 /* processes list pointer */

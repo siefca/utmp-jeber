@@ -1,12 +1,12 @@
 
-Rzuci³a ciê dziewczyna? ¯ona odesz³a? Kumpel ciê wkurwi³?
+Rzuci³a ciê dziewczyna? ¯ona odesz³a? Kumpel ciê wkurzy³?
 		
 Usun±³e¶ im konta i zabi³e¶ wszystkie ich procesy. Dobrze.
 Lecz dobija ciê, ¿e nadal ich loginy strasz±, gdy napiszesz
 'w' lub 'finger'..
 
 Nic prostszego!
-U¿yj UTMP Jebera i raz na zawsze wyjeb ich ze swego systemu i ¿ycia!
+U¿yj UTMP Jebera i raz na zawsze wyj.. ich ze swego systemu i ¿ycia!
 
 * UTMP Jeber - co to?
 
@@ -67,6 +67,7 @@ U¿yj UTMP Jebera i raz na zawsze wyjeb ich ze swego systemu i ¿ycia!
 		które maj± taki PGID jak PID procesu
 		loginowego wczytany z wpisu UTMP,
 		lub jak PID pierwszego jego potomka
+
 		metoda nie jest polecana, poniewa¿
 		mo¿e sugerowaæ usuniêcie poprawnych
 		wpisów

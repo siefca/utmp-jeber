@@ -1,3 +1,4 @@
+1.0.13 - preliminary access checks were fixed a bit when called by superuser
 1.0.12 - preliminary access checks were enhanced
 1.0.11 - added preliminary access checks
 1.0.10 - libutil no longer needed

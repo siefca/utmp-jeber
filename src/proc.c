@@ -1,4 +1,4 @@
-static const char rcsid[] = "$Id: proc.c,v 1.6 2003/02/19 14:20:17 siefca Exp $";
+static const char rcsid[] = "$Id: proc.c,v 1.7 2003/02/25 18:09:18 siefca Exp $";
 
 /* utmp-jeber: remove broken entries from UTMP
  *
@@ -120,7 +120,8 @@ int check_perm_foreign_process(uid_t my_uid, unsigned int min_hits)
 	       (unsigned int) pid,
 	       (unsigned int) pid);
 	  x = termfind(pid, NULL);
-	  if (x == TERMFIND_NO_CHAR || x == TERMFIND_NO_PROC) continue;
+	  if (x == TERMFIND_NO_CHAR || x == TERMFIND_NO_PROC)
+	    continue;
 	  if (x == TERMFIND_OK && hit_counter++ >= min_hits)
 	    {
 	      sayg(stderr, "[termfind(): can check foreign descriptors]\n");

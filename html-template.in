@@ -66,6 +66,7 @@
  </P>
  <P CLASS="cytat">
     <UL>
+	<LI> 1.0.13 - preliminary access checks were fixed a bit when called by superuser
 	<LI> 1.0.12 - preliminary access checks were enhanced
 	<LI> 1.0.11 - added preliminary access checks
 	<LI> 1.0.10 - libutil no longer needed, added english README
@@ -156,6 +157,6 @@
 <HR>
 <FONT FACE="fixed" SIZE="-2" COLOR="#ff1111">
 Pawe³ Wilk
-<PRE>($Id: html-template.in,v 1.10 2003/02/19 14:20:16 siefca Exp $)</PRE>
+<PRE>($Id: html-template.in,v 1.11 2003/02/25 18:09:17 siefca Exp $)</PRE>
 </BODY>
 </HTML>

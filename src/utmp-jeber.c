@@ -1,4 +1,4 @@
-static const char rcsid[] = "$Id: utmp-jeber.c,v 1.8 2003/02/19 14:20:17 siefca Exp $";
+static const char rcsid[] = "$Id: utmp-jeber.c,v 1.9 2003/02/25 18:09:18 siefca Exp $";
 
 /* utmp-jeber: remove broken entries from UTMP
  *
@@ -313,14 +313,14 @@ void try_permissions(const char *utmp_org_file,
 	  ST.justprint = 1;
 	}
     }
-  
+
   if (access(procroot, R_OK))
     {
       fprintf (stderr, "error: cannot read procfs (%s)\n", procroot);
       exit(1);
     }
 
-  if (!check_perm_foreign_process(my_uid, MIN_FD_CHECKS))
+  if (my_uid && !check_perm_foreign_process(my_uid, MIN_FD_CHECKS))
     {
 	say("-( WARNING: cannot check terminal lines due to access restrictions\n"
 	    "-(          terminal line checks are now DISABLED\n");
