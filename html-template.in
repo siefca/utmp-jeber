@@ -66,6 +66,7 @@
  </P>
  <P CLASS="cytat">
     <UL>
+	<LI> 1.0.9 - added cron script and rpm subpackage for it
 	<LI> 1.0.8 - first official release
 	<LI> 1.0.6 - initial release on PLD's CVS
     </UL>
@@ -151,6 +152,6 @@
 <BR>&nbsp;<BR>
 <HR>
 <FONT FACE="fixed" SIZE="-2" COLOR="#ff1111">
-Pawe³ Wilk <PRE>            ($Id: html-template.in,v 1.5 2003/02/11 13:24:23 siefca Exp $)  </PRE>
+Pawe³ Wilk <PRE>            ($Id: html-template.in,v 1.6 2003/02/11 16:12:58 siefca Exp $)  </PRE>
 </BODY>
 </HTML>
