@@ -87,6 +87,10 @@ sometimes_built_SUBDIRS =
 SUBDIRS = $(always_built_SUBDIRS)
 
 EXTRA_DIST = INSTALL README.polish COPYING KOPIOWANIE AUTHORS README NEWS ChangeLog TODO
+
+FTP_USER = siewca
+FTP_HOST = team.pld.org.pl
+FTP_DIR = /home/ftp/software/$(PACKAGE)
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
@@ -432,8 +436,10 @@ rpm: Makefile
 	$(MAKE) dist
 	rpm -ta --clean $(PACKAGE)-$(VERSION).tar.gz
 
-distpublish: Makefile
+publish: Makefile
 	$(MAKE) dist
+	scp $(PACKAGE)-$(VERSION).tar.gz $(EXTRA_DIST) $(FTP_USER)@$(FTP_HOST):$(FTP_DIR)
+	ssh $(FTP_USER)@$(FTP_HOST) "cd $(FTP_DIR) && chmod 0644 $(PACKAGE)-$(VERSION).tar.gz $(EXTRA_DIST)"
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:
