@@ -74,12 +74,14 @@
 
 <TR><TD bgcolor="#404040">
  <P CLASS="uszko">
-    README
+    QUICK DOCS
  </P>
  <P CLASS="cytat">
     <UL>
 	<LI> <A HREF="README">view README</A>
 	<LI> <A HREF="README.polish">view README.polish</A>
+	<LI> <A HREF="jeber.png">view screenshot</A>
+	<LI> <A HREF="COPYING">view COPYING</A>
     </UL>
  </P>
 </TD></TR>

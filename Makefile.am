@@ -20,7 +20,7 @@ SRC_RPM		= $(PACKAGE)-$(VERSION)-$(RELEASE).src.rpm
 CUR_SRPM	= $(PACKAGE)-current.src.rpm
 
 WEB_LOCALDIR	= www
-WEB_DIST	= index.html README README.polish $(TAR_GZ) $(SRC_RPM)
+WEB_DIST	= index.html jeber.png COPYING README README.polish $(TAR_GZ) $(SRC_RPM)
 
 CLEANFILES	= *~
 
@@ -50,7 +50,7 @@ mirrors: Makefile
 ## WWW
 www: Makefile
 	@cp html-template $(WEB_LOCALDIR)/index.html
-	@cp README* $(WEB_LOCALDIR)
+	@cp COPYING README* $(WEB_LOCALDIR)
 	@cp $(TAR_GZ) $(WEB_LOCALDIR)
 	@cp $(HOME)/rpm/SRPMS/$(SRC_RPM) $(WEB_LOCALDIR)
 
