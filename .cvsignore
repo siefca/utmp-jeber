@@ -32,3 +32,5 @@ stamp.h
 version.h
 install-sh
 INSTALL
+mirrors-list
+mirror-list.tmp

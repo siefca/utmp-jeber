@@ -35,20 +35,28 @@ rpm: Makefile
 
 ## publish dist on FTP
 ftp-publish: Makefile rpm
-	scp $(TAR_GZ) $(HOME)/rpm/SRPMS/$(SRC_RPM) $(FTP_DIST) $(FTP_USER)@$(FTP_HOST):$(FTP_DIR)
-	ssh $(FTP_USER)@$(FTP_HOST) "cd $(FTP_DIR) && rm -f CURRENT_IS* *-current.* ; touch CURRENT_IS_$(VERSION) ; ln -s $(TAR_GZ) $(CUR_GZ) ; ln -s $(SRC_RPM) $(CUR_SRPM)"
-	ssh $(FTP_USER)@$(FTP_HOST) "cd $(FTP_DIR) && chmod 0644 $(TAR_GZ) $(FTP_DIST) $(SRC_RPM) CURRENT_IS*"
+	@echo Publishing FTP Directory..
+	@scp $(TAR_GZ) $(HOME)/rpm/SRPMS/$(SRC_RPM) $(FTP_DIST) $(FTP_USER)@$(FTP_HOST):$(FTP_DIR)
+	@ssh $(FTP_USER)@$(FTP_HOST) "cd $(FTP_DIR) && rm -f CURRENT_IS* *-current.* ; touch CURRENT_IS_$(VERSION) ; ln -s $(TAR_GZ) $(CUR_GZ) ; ln -s $(SRC_RPM) $(CUR_SRPM)"
+	@ssh $(FTP_USER)@$(FTP_HOST) "cd $(FTP_DIR) && chmod 0644 $(TAR_GZ) $(FTP_DIST) $(SRC_RPM) CURRENT_IS*"
+
+## fetch FTP mirros list and format it
+mirrors: Makefile
+	@echo fetching mirror list
+	@lynx -dump -nolist http://www.pld.org.pl/distrib/ftp/ | grep "ftp://" | tr '*' -s ' ' \
+	| awk '{print "<LI> <A HREF=\""$$1"software/$(PACKAGE)/\">"$$1"software/$(PACKAGE)/<\A>"}' > mirror-list
 
 ## WWW
 www: Makefile rpm
-	mv html-template $(WEB_LOCALDIR)/index.html
-	cp $(TAR_GZ) $(WEB_LOCALDIR)
-	cp $(HOME)/rpm/SRPMS/$(SRC_RPM) $(WEB_LOCALDIR)
+	@cp html-template $(WEB_LOCALDIR)/index.html
+	@cp $(TAR_GZ) $(WEB_LOCALDIR)
+	@cp $(HOME)/rpm/SRPMS/$(SRC_RPM) $(WEB_LOCALDIR)
 
 ## publish dist on WWW
 www-publish: Makefile www
-	cd $(WEB_LOCALDIR) && scp *.html *.tar.gz *.src.rpm $(WWW_USER)@$(WWW_HOST):$(WWW_DIR)
-	ssh $(WWW_USER)@$(WWW_HOST) "cd $(WWW_DIR) && chmod 0644 *"
+	@echo Publishing Web Page..
+	@cd $(WEB_LOCALDIR) && scp *.html *.tar.gz *.src.rpm $(WWW_USER)@$(WWW_HOST):$(WWW_DIR)
+	@ssh $(WWW_USER)@$(WWW_HOST) "cd $(WWW_DIR) && chmod 0644 *"
 
 ## publish both, on WWW and FTP
-publish: Makefile www ftp-publish www-publish
+publish: Makefile ftp-publish www-publish

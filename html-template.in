@@ -1,4 +1,4 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+ <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML>
 <HEAD>
 <TITLE>@PACKAGE@</TITLE>
@@ -23,9 +23,10 @@
        .omnie { color:#eeeeee; font-family:"Arial CE",Arial,Helvetica,"Times New Roman CE"; font-size:12pt; text-decoration: none; }
        .kropy { font-family:"Lucida Console",monospace,"Courier New CE","Courier New",Fixed; font-size:12pt; color:#667766; text-decoration: none; }
        .opislinka { font-family:"Arial CE",Arial,Times,Courier,"Courier New CE"; font-size:12pt; color:#eeffee; text-decoration: none; }
-       a:link { color:#ffddff; text-decoration: underline; }
-       a:visited { color:#ffddff; text-decoration: underline; }
-       a:hover { color:#efefef; text-decoration: none; }
+       a:link { color:#77cc55; text-decoration: none; }
+       a:visited { color:#77cc55; text-decoration: none; }
+       a:hover { color:#ffff11; text-decoration: underline; }
+       li { font-family:"Arial CE",Arial,Times,Courier,"Courier New CE"; font-size:11pt; text-decoration: none; }
   //-->
  </style>
 
@@ -64,7 +65,10 @@
     NEWS
  </P>
  <P CLASS="cytat">
-    1.0.8 - first official release.
+    <UL>
+	<LI> 1.0.8 - first official release
+	<LI> 1.0.6 - initial release on PLD's CVS
+    </UL>
  </P>
 </TD></TR>
 
@@ -74,39 +78,66 @@
  </P>
  <P CLASS="cytat">
     UTMP Jeber current tarball release is available at:<BR>
-    <BLOCKQUOTE>
-	-( <A HREF="@PACKAGE@-@VERSION@.tar.gz">@PACKAGE@-@VERSION@.tar.gz</A><BR>
-	-( <A HREF="ftp://ftp.pld.org.pl/software/@PACKAGE@/@PACKAGE@-@VERSION@.tar.gz">ftp://ftp.pld.org.pl/software/@PACKAGE@/@PACKAGE@-@VERSION@.tar.gz</A><BR>
-    </BLOCKQUOTE>
+    <UL>
+	<LI> <A HREF="@PACKAGE@-@VERSION@.tar.gz">@PACKAGE@-@VERSION@.tar.gz</A>
+	<LI> <A HREF="ftp://ftp.pld.org.pl/software/@PACKAGE@/@PACKAGE@-@VERSION@.tar.gz">ftp://ftp.pld.org.pl/software/@PACKAGE@/@PACKAGE@-@VERSION@.tar.gz</A>
+    </UL>
  </P>
  <P CLASS="cytat">
     UTMP Jeber current source RPM release is available at:<BR>
-    <BLOCKQUOTE>
-	-( <A HREF="@PACKAGE@-@VERSION@-@RELEASE@.src.rpm">@PACKAGE@-@VERSION@-@RELEASE@.src.rpm</A><BR>
-	-( <A HREF="ftp://ftp.pld.org.pl/software/@PACKAGE@/@PACKAGE@-@VERSION@-@RELEASE@.src.rpm">ftp://ftp.pld.org.pl/software/@PACKAGE@/@PACKAGE@-@VERSION@-@RELEASE@.src.rpm</A><BR>
-    </BLOCKQUOTE>
+    <UL>
+	<LI> <A HREF="@PACKAGE@-@VERSION@-@RELEASE@.src.rpm">@PACKAGE@-@VERSION@-@RELEASE@.src.rpm</A>
+	<LI> <A HREF="ftp://ftp.pld.org.pl/software/@PACKAGE@/@PACKAGE@-@VERSION@-@RELEASE@.src.rpm">ftp://ftp.pld.org.pl/software/@PACKAGE@/@PACKAGE@-@VERSION@-@RELEASE@.src.rpm</A>
+    </UL>
  </P>
  <P CLASS="cytat">
     Please browse FTP dir in order to download other releases:<BR>
-    <BLOCKQUOTE>
-	-( <A HREF="ftp://ftp.pld.org.pl/software/@PACKAGE@/">ftp://ftp.pld.org.pl/software/@PACKAGE@/</A><BR>
-    </BLOCKQUOTE>
+    <UL>
+	<LI> <A HREF="ftp://ftp.pld.org.pl/software/@PACKAGE@/">ftp://ftp.pld.org.pl/software/@PACKAGE@/</A>
+    </UL>
  </P>
  <P CLASS="cytat">
-    Please see the list of available FTP mirrors (if you'll find the server search for sources in current/software/@PACKAGE@):
-    <BLOCKQUOTE>
-	-( <A HREF="http://www.pld.org.pl/distrib/ftp/">http://www.pld.org.pl/distrib/ftp/</A><BR>
-    </BLOCKQUOTE>
+    Download mirrors (fetched from <A HREF="http://www.pld.org.pl/distrib/ftp/index.php.en">http://www.pld.org.pl/distrib/ftp/index.php.en</A>):
+    <UL>
+<LI> <A HREF="ftp://ftp.pld.org.pl/software/utmp-jeber/">ftp://ftp.pld.org.pl/software/utmp-jeber/</A> - ICM, Warsaw, Poland
+<LI> <A HREF="ftp://ftp.icm.edu.pl/pub/Linux/distributions/pld/software/utmp-jeber/">ftp://ftp.icm.edu.pl/pub/Linux/distributions/pld/software/utmp-jeber/</A> - ICM, Warsaw, Poland
+<LI> <A HREF="ftp://ftp.wsisiz.edu.pl/pub/Linux/PLD/software/utmp-jeber/">ftp://ftp.wsisiz.edu.pl/pub/Linux/PLD/software/utmp-jeber/</A> - WSISIZ, Warsaw, Poland
+<LI> <A HREF="ftp://ftp.task.gda.pl/pub/linux/PLD/software/utmp-jeber/">ftp://ftp.task.gda.pl/pub/linux/PLD/software/utmp-jeber/</A> - TASK, Gdansk, Poland
+<LI> <A HREF="ftp://ftp.pld.kernel.pl/software/utmp-jeber/">ftp://ftp.pld.kernel.pl/software/utmp-jeber/</A> - ICM, Warsaw, Poland
+<LI> <A HREF="ftp://ftp.futuro.pl/pub/distributions/PLD/software/utmp-jeber/">ftp://ftp.futuro.pl/pub/distributions/PLD/software/utmp-jeber/</A> - ProFuturo, Lublin, Poland
+<LI> <A HREF="ftp://ftp.rpmfind.net/linux/PLD/current/software/utmp-jeber/">ftp://ftp.rpmfind.net/linux/PLD/current/software/utmp-jeber/</A> - MIT, Boston, USA
+<LI> <A HREF="ftp://fr.rpmfind.net/linux/PLD/current/software/utmp-jeber/">ftp://fr.rpmfind.net/linux/PLD/current/software/utmp-jeber/</A> - INRIA Rhone-Alpes, Montbonnot, France
+<LI> <A HREF="ftp://fr2.rpmfind.net/linux/PLD/software/utmp-jeber/">ftp://fr2.rpmfind.net/linux/PLD/software/utmp-jeber/</A> - Creatis/CISM, Lyon, France
+<LI> <A HREF="ftp://gd.tuwien.ac.at/opsys/linux/PLD/software/utmp-jeber/">ftp://gd.tuwien.ac.at/opsys/linux/PLD/software/utmp-jeber/</A> - TUW, Wien, Austria
+<LI> <A HREF="http://gd.tuwien.ac.at/opsys/linux/PLD/software/utmp-jeber/">http://gd.tuwien.ac.at/opsys/linux/PLD/software/utmp-jeber/</A> - TUW, Wien, Austria (WWW)
+<LI> <A HREF="ftp://spirit.profinet.sk/mirrors/PLD/software/utmp-jeber/">ftp://spirit.profinet.sk/mirrors/PLD/software/utmp-jeber/</A> - Prof-I-Net, Bratislava, Slovakia
+    </UL>
  </P>
 </TD></TR>
+
+<TR><TD bgcolor="#404040">
+ <P CLASS="uszko">
+    CVS ACCESS
+ </P>
+ <P CLASS="cytat">
+    Anonymous CVS access:<BR>
+    <UL>
+	<LI> :pserver:cvs@anoncvs.pld.org.pl:/cvsroot (module name: utmp-jeber)
+    </UL>
+ </P>
+ <P CLASS="cytat">
+    CVS Web Interface:<BR>
+    <UL>
+	<LI> <A HREF="http://cvs.pld.org.pl/utmp-jeber/">http://cvs.pld.org.pl/utmp-jeber/</A>
+    </UL>
+ </P>
+</TD></TR>
+
 </table>
 
 <BR>&nbsp;<BR>
 <HR>
-<CENTER>
 <FONT FACE="fixed" SIZE="-2" COLOR="#ff1111">
-
-</CENTER>
-
+Pawe³ Wilk
 </BODY>
 </HTML>
