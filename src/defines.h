@@ -20,17 +20,23 @@
 #define	VERSION	"1.0.6"
 #endif
 
-#define	INIT_NOT_PROVIDE
-
 #define sayg	if (ST.debug) fprintf
 #define	say	if (ST.verb) printf
 #define	log	if (ST.batched) printf
 #define	P_PRE	"/proc"
 #define	P_SUF	"fd"
 
+/* consider init proccess as possible parent for user session? */
+
+#ifndef CONSIDER_INIT
+#define	INIT_NOT_PROVIDE
+#endif
+
 /* max search depth while jumping from parent to parent */
 
+#ifndef SRCH_DEEP
 #define	SRCH_DEEP	256
+#endif
 
 /* processes list pointer */
 

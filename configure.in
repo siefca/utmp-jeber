@@ -6,8 +6,11 @@ VERSION=1.0.6
 BUGREPORT=siefca@gnu.org
 
 AC_CONFIG_SRCDIR([config.h.in])
-
 AM_INIT_AUTOMAKE($PACKAGE,$VERSION,$BUGREPORT)
+AM_MAINTAINER_MODE
+
+AH_TEMPLATE(CONSIDER_INIT,Define this if you want init to be treated as possible parent of session processes)
+
 AM_CONFIG_HEADER([config.h])
 AM_ACLOCAL_INCLUDE(macros)
 
@@ -47,8 +50,20 @@ dnl Checks for library functions.
 AC_FUNC_MALLOC
 AC_FUNC_STAT
 AC_CHECK_FUNCS([getpgid getopt snprintf strchr memcpy memset])
-
 AM_CONDITIONAL(HAVE_SNPRINTF,test "x$ac_cv_func_snprintf" = "xyes")
+
+dnl Checks for arguments line conditions
+AC_MSG_CHECKING(whether to treat init process as possible parent of sessions)
+AC_ARG_ENABLE(
+    init_as_parent,
+    [  --enable-init-as-parent enable treating init as possible parent of sessions [default=no]], [
+		if test "$enableval" = "no"; then
+			AC_MSG_RESULT([no])
+		else
+			AC_MSG_RESULT([yes])
+			AC_DEFINE_UNQUOTED(CONSIDER_INIT)
+		fi
+	], AC_MSG_RESULT([no]) )
 
 dnl Export variables
 AC_SUBST(EXTRA_SOURCES)

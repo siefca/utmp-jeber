@@ -1,4 +1,4 @@
-always_built_SUBDIRS = src
+always_built_SUBDIRS = src macros
 
 sometimes_built_SUBDIRS = 
 

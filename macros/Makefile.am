@@ -1,5 +1,6 @@
 ## Please update this variable if any new macros are created
-MACROS=	compiler-flags.m4		\
+MACROS=compiler-flags.m4 \
+	aclocal-include.m4 \
 	aclocal-include.m4
 
 EXTRA_DIST=$(MACROS) autogen.sh
