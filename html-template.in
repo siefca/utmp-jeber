@@ -66,6 +66,7 @@
  </P>
  <P CLASS="cytat">
     <UL>
+	<LI> 1.0.11 - added preliminary access checks
 	<LI> 1.0.10 - libutil no longer needed, added english README
 	<LI> 1.0.9  - added cron script and rpm subpackage for it
 	<LI> 1.0.8  - first official release
@@ -154,6 +155,6 @@
 <HR>
 <FONT FACE="fixed" SIZE="-2" COLOR="#ff1111">
 Pawe³ Wilk
-<PRE>($Id: html-template.in,v 1.8 2003/02/12 12:32:00 siefca Exp $)</PRE>
+<PRE>($Id: html-template.in,v 1.9 2003/02/14 23:26:12 siefca Exp $)</PRE>
 </BODY>
 </HTML>
