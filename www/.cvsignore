@@ -5,3 +5,5 @@ Makefile.in
 index.html
 *.tar.gz
 *.src.rpm
+README
+README.polish
