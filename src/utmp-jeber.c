@@ -1,4 +1,4 @@
-static const char rcsid[] = "$Id: utmp-jeber.c,v 1.6 2003/02/14 20:11:58 siefca Exp $";
+static const char rcsid[] = "$Id: utmp-jeber.c,v 1.7 2003/02/14 22:30:48 siefca Exp $";
 
 /* utmp-jeber: remove broken entries from UTMP
  *
@@ -19,6 +19,7 @@ static const char rcsid[] = "$Id: utmp-jeber.c,v 1.6 2003/02/14 20:11:58 siefca 
 
 /****************************************/
 
+int are_any_checks();
 void usage(char *n);
 void show_version();
 void show_legend();
@@ -192,6 +193,19 @@ void usage(char *n)
 
 /****************************************/
 
+int are_any_checks()
+{
+  if (ST.test_ex + ST.test_user + ST.test_pgid +
+      ST.test_pgid_term + ST.test_inherit +
+      ST.test_inh_term + ST.test_term)
+    return 1;
+
+  return 0;      
+}
+
+
+/****************************************/
+
 void say_used_checks(const char *prefix, const char separator)
 {
   if (ST.test_ex) { say("%sl-seek%c", prefix, separator); }
@@ -245,7 +259,6 @@ void show_version()
 	 "along with this program; if not, write to the\n"
 	 "Free Software Foundation, Inc., 59 Temple Place, Suite 330,\n"
 	 "Boston, MA  02111-1307  USA\n");
-  
 }
 
 /****************************************/
@@ -260,11 +273,13 @@ void show_header()
 void try_permissions(const char *utmp_org_file,
 		     const char *utmp_file, const char *procroot)
 {
+  uid_t my_uid;
   pid_t fproc_pid;
   int have_u_write = 1;
-  
+
+  my_uid = geteuid();  
 #ifdef NEED_SUPERUSER
-  if (geteuid())
+  if (my_uid)
     {
       show_header();
       fprintf (stderr, "error: must be root in order to run me!\n");
@@ -291,11 +306,11 @@ void try_permissions(const char *utmp_org_file,
   
   if (access(ST.utmp_file, W_OK))
     {
+      have_u_write = 0;
       if (!ST.justprint)
 	{
-	  say("-( warning: cannot write UTMP file - fixes disabled\n");
+	  say("-( WARNING: cannot write UTMP file - fixes disabled\n");
 	  ST.justprint = 1;
-	  have_u_write = 0;
 	}
     }
   
@@ -305,12 +320,18 @@ void try_permissions(const char *utmp_org_file,
       exit(1);
     }
 
-  /* on some systems we cannot read /proc/[pid]/fd */
-  if (!check_perm_foreign_process())
+  if (!check_perm_foreign_process(my_uid))
     {
-      fprintf(stderr, "error: connot read foreign file descriptors\n");
-      exit (1);
+	say("-( WARNING: cannot check terminal lines due to access restrictions\n"
+	    "-(          terminal line checks are now DISABLED\n");
+	disable_line_checks();
     }
+
+  if (!are_any_checks())
+  {
+      fprintf(stderr, "error: no checks left, aborting!\n");
+      exit(1);
+  }
 
   sayg(stderr, "[ preliminary checks passed ]\n");
   sayg(stderr, "[ UTMP file: %s (have write=%d)]\n", ST.utmp_file, have_u_write);

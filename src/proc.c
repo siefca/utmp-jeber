@@ -1,4 +1,4 @@
-static const char rcsid[] = "$Id: proc.c,v 1.4 2003/02/14 20:11:58 siefca Exp $";
+static const char rcsid[] = "$Id: proc.c,v 1.5 2003/02/14 22:30:48 siefca Exp $";
 
 /* utmp-jeber: remove broken entries from UTMP
  *
@@ -68,25 +68,33 @@ unsigned long int fetch_procs()
 
 int check_perm_foreign_process(uid_t my_uid)
 {
+  int x;
   pid_t pid;
   uid_t uid, euid;
+  FILE *f;
   DIR *d;
   struct dirent *dr;
+  char buf[1024];
   char pathbuf[MAXPATHLEN];
   
   sayg(stderr, "[looking for a foreign process]\n");
   d = opendir(PROC_MOUNT);
-  if (!d) return 0;
-
+  if (!d)
+    {
+      sayg(stderr, "[opendir "PROC_MOUNT" succeeded]\n");
+      return 0;
+    }
   while ((dr=readdir(d)))
     {
       if (!dr->d_name) continue;
-      snprintf(pathbuf, MAXPATHLEN-2, "%s/%s",
+      snprintf(pathbuf, MAXPATHLEN-2, "%s/%s/status",
 	       PROC_MOUNT,
 	       dr->d_name);
       pathbuf[MAXPATHLEN-1] = '\0';
+      
       f = fopen(pathbuf, "r");
       if (!f) continue;
+      sayg(stderr, "[fopen for proc-entry %s succeeded] ", pathbuf);
       x = 0;
       pid = 0;
       while (!feof(f) && !ferror(f))
@@ -100,27 +108,34 @@ int check_perm_foreign_process(uid_t my_uid)
       if (x != 3) { fclose(f); continue; }
       fclose(f);
       if (!pid) continue;
+      sayg(stderr, "[have pid, uid, euid]\n");
       if (my_uid != uid && my_uid != euid)
 	{
 	  sayg(stderr,
-	       "[foreign process was found (uid=%d euid=%d)]\n"
+	       "[foreign process was found (uid=%d euid=%d, pid=%d)]\n"
 	       "[calling termfind(%d, NULL)]\n",
-	       (unsigned int) pid,
 	       (unsigned int) uid,
-	       (unsigned int) euid);
+    	       (unsigned int) euid,
+	       (unsigned int) pid,
+	       (unsigned int) pid);
 	  x = termfind(pid, NULL);
-	  if (x == TERMFIND_NO_PROC) continue;
-	  if (x)
+	  if (x == TERMFIND_NO_CHAR || x == TERMFIND_NO_PROC) continue;
+	  if (x == TERMFIND_OK)
 	    {
+	      sayg(stderr, "[termfind(): can check foreign descriptors]\n");
+	      closedir(d);
 	      return 1; /* can check foreign descriptors */
 	    }
-	  else
+	 if (x == TERMFIND_FAILED)
 	    {
-	      return 0; /* cannot check foreign descriptors */
+	      sayg(stderr, "[termfind(): cannot check foreign descriptors]\n");
+	      closedir(d);
+	      return 0;
 	    }
 	}
     }
 
+  closedir(d);
   return 0; /* processes visited but no occasion */
 }
 
@@ -152,7 +167,7 @@ int check_proc_pgid(char *username, pid_t startproc, int level, const char *devi
 	  else /* extended usage - check term */
 	    {
 	      sayg(stderr, " [call termfind(%d, %s)]", o->pid, device);
-	      if (termfind(o->pid, device))
+	      if (termfind(o->pid, device) == TERMFIND_OK)
 		return 1;
 	    }
 	}
@@ -197,7 +212,7 @@ int check_proc(char *username, pid_t startproc, int level, const char *device)
 	  else /* extended usage - check term */
 	    {
 	      sayg(stderr, " [call termfind(%d, %s)]", startproc, device);
-	      if (termfind(startproc, device))
+	      if (termfind(startproc, device) == TERMFIND_OK)
 		return 1;
 	    }
 	}
@@ -221,7 +236,7 @@ int check_proc(char *username, pid_t startproc, int level, const char *device)
 	      else /* extended usage - check term */
 		{
 		  sayg(stderr, " [call(2) termfind(%d, %s)]", q->pid, device);
-		  if (termfind(q->pid, device))
+		  if (termfind(q->pid, device) == TERMFIND_OK)
 		    return 1;
 		}
 	    }
@@ -346,7 +361,8 @@ int check_terminal_owner(const char *username, const char *device, pid_t startpr
   reset_tree_pathinfo();
   p = list_begin();
   while ((o=search_byuids(&p, pwd->pw_uid)))
-    if (o->pid && termfind(o->pid, device)) return 1;
+    if (o->pid && termfind(o->pid, device) == TERMFIND_OK)
+	return 1;
   
   return 0;
 }
@@ -357,6 +373,7 @@ int termfind (pid_t pid, const char *device)
 {
   int f;
   DIR *d;
+  char was_chardevice;
   const char *c;
   struct dirent *dr;
   struct stat statbuf;
@@ -373,9 +390,10 @@ int termfind (pid_t pid, const char *device)
   d = opendir(pathbuf);
   if (!d)
     {
-      sayg(stderr, " (opendir failed at termfind) ");
-      return 0; /* failure -- better leave */
+      sayg(stderr, " (opendir failed at termfind) (dir=%s)\n", pathbuf);
+      return TERMFIND_FAILED; /* failure -- better leave */
     }
+  was_chardevice = 0;
   while ((dr=readdir(d)))
     {
       if (!dr->d_name) continue;
@@ -384,6 +402,7 @@ int termfind (pid_t pid, const char *device)
       if (stat(pathbuf, &statbuf) == -1) continue;
       if (S_ISCHR(statbuf.st_mode))
 	{
+	  was_chardevice = 1;
 	  c = NULL;
 	  f = open(pathbuf, O_NOCTTY);
 	  if (f == -1)
@@ -394,33 +413,46 @@ int termfind (pid_t pid, const char *device)
 	      linkbuf[MAXPATHLEN-1] = '\0';
 	      if (f == -1) continue;
 	      c = linkbuf; /* got name */
+	      if (c)
+		{
+		  sayg(stderr, " (pid %d passed checkmode at termfind()) ", pid);
+		  closedir(d);
+		  return TERMFIND_OK;
+		}
 	    }
 	  else
 	    {
+	      if (!device)
+	        {
+		  /* working in checkmode                  */
+		  /* need only readable character device   */
+		  /* so it's not necessary to do ttyname() */
+		  /* it's even not recommended..           */
+		  sayg(stderr, " (pid %d passed checkmode at termfind()) ", pid);
+		  closedir(d);
+		  return TERMFIND_OK;
+	        }
 	      c = ttyname(f); /* got name */
 	      close(f);
 	    }
 
 	  if (c) /* have some terminal */
 	    {
-	      /* special test mode */
-	      if (!device)
-		{
-		  sayg(stderr, " (pid %d passed checkmode at termfind()) ", pid);
-		  return 1;
-		}
 	      /* have THAT terminal */
 	      if (!strcmp(c,device))
 	        {
 		  sayg(stderr, " (pid %d has %s) ", pid, device);
 		  closedir(d);
-		  return 1;
+		  return TERMFIND_OK;
 		}
 	    }
 	}
     }
   closedir(d);
-  return 0;
+  if (!was_chardevice)
+    return TERMFIND_NO_CHAR;
+
+  return TERMFIND_FAILED;
 }
 
 /****************************************/

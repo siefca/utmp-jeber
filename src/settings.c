@@ -1,4 +1,5 @@
-static const char rcsid[] = "$Id: settings.c,v 1.2 2003/02/11 13:24:28 siefca Exp $";
+static const char rcsid[] = "$Id: settings.c,v 1.3 2003/02/14 22:30:48 siefca Exp $";
+
 /* utmp-jeber: remove broken entries from UTMP
  *
  * GNU/Linux program, 
@@ -58,6 +59,24 @@ void postconf_settings()
 	ST.test_term = 0;
 	ST.test_inherit = 0;
     }
+}
+
+/****************************************/
+
+void disable_line_checks()
+{
+    if (ST.test_inh_term)
+    {
+	ST.test_inh_term = 0;
+	ST.test_inherit = 1;
+    }
+    if (ST.test_pgid_term)
+    {
+	ST.test_pgid_term = 0;
+	ST.test_pgid = 1;
+    }
+    if (ST.test_term)
+	ST.test_term = 0;
 }
 
 /****************************************/

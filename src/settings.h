@@ -34,5 +34,6 @@ extern sts ST;
 
 void init_settings();
 void postconf_settings();
+void disable_line_checks();
 
 #endif
