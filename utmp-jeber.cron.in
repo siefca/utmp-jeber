@@ -1,0 +1,13 @@
+#!/bin/sh
+
+# $Id: utmp-jeber.cron.in,v 1.1 2003/02/11 16:00:33 siefca Exp $
+#
+# This is cron script for UTMP jeber.
+#
+
+RESULT=`@PACKAGE@ -bx`
+if [ "x$RESULT" != "x" ]; then
+    logger -t "@PACKAGE@" -p auth.notice "$RESULT"
+fi
+
+exit 0
