@@ -1,0 +1,21 @@
+/* utmp-jeber: remove broken entries from UTMP
+ *
+ * GNU/Linux program, 
+ * Copyright (C) 2003 Pawel Wilk <siefca@gnu.org>,
+ *
+ * This is free software; see the GNU General Public License version 2
+ * or later for copying conditions.  There is NO warranty.
+ *
+ */
+
+#define	_XOPEN_SOURCE
+#define	_XOPEN_SOURCE_EXTENDED
+
+#include <unistd.h>
+#include <sys/types.h>
+
+inline pid_t my_getpgid(pid_t p)
+{
+    return getpgid(p);
+}
+

@@ -1,0 +1,1 @@
+$(top_srcdir)/aclocal.m4: macros/compiler-flags.m4 macros/aclocal-include.m4
