@@ -22,9 +22,9 @@ struct pidlist
     uid_t uid;	/* UID	*/
     uid_t euid;	/* EUID	*/
     pid_t pgid; /* PGID */
-    unsigned char checked; /* used by tree-search to mark BAD paths */
-    struct pidlist *parent; /* self explanatoru */
-    struct pidlist *next; /* as above */
+    unsigned char checked;	/* used by tree-search to mark BAD paths */
+    struct pidlist *parent;	/* self explanatoru */
+    struct pidlist *next;	/* as above */
 };
 
 extern struct pidlist plist;

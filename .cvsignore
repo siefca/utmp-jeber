@@ -25,6 +25,7 @@ ABOUT-NLS
 .deps
 aclocal.m4
 configure.scan
+autoscan.log
 missing
 mkinstalldirs
 stamp.h

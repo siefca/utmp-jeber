@@ -756,23 +756,6 @@ AC_CONFIG_COMMANDS_PRE(
 Usually this means the macro was only invoked conditionally.])
 fi])])
 
-# aclocal-include.m4
-# 
-# This macro adds the name macrodir to the set of directories
-# that `aclocal' searches for macros.  
-
-# serial 1
-
-dnl AM_ACLOCAL_INCLUDE(macrodir)
-AC_DEFUN([AM_ACLOCAL_INCLUDE],
-[
-	AM_CONDITIONAL(INSIDE_GNOME_COMMON, test x = y)
-
-	test -n "$ACLOCAL_FLAGS" && ACLOCAL="$ACLOCAL $ACLOCAL_FLAGS"
-
-	for k in $1 ; do ACLOCAL="$ACLOCAL -I $k" ; done
-])
-
 # Like AC_CONFIG_HEADER, but automatically create stamp file. -*- Autoconf -*-
 
 # Copyright 1996, 1997, 2000, 2001 Free Software Foundation, Inc.
@@ -850,4 +833,21 @@ $2],
 AC_DEFUN([AM_CONFIG_HEADER],
 [AC_FOREACH([_AM_File], [$1], [_AM_CONFIG_HEADER(_AM_File, [$2], [$3])])
 ])# AM_CONFIG_HEADER
+
+# aclocal-include.m4
+# 
+# This macro adds the name macrodir to the set of directories
+# that `aclocal' searches for macros.  
+
+# serial 1
+
+dnl AM_ACLOCAL_INCLUDE(macrodir)
+AC_DEFUN([AM_ACLOCAL_INCLUDE],
+[
+	AM_CONDITIONAL(INSIDE_GNOME_COMMON, test x = y)
+
+	test -n "$ACLOCAL_FLAGS" && ACLOCAL="$ACLOCAL $ACLOCAL_FLAGS"
+
+	for k in $1 ; do ACLOCAL="$ACLOCAL -I $k" ; done
+])
 

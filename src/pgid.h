@@ -11,7 +11,17 @@
 #ifndef	PGID_H
 #define	PGID_H
 
-#include <sys/types.h>
+#include "defines.h"
+
+#define	_XOPEN_SOURCE
+#define	_XOPEN_SOURCE_EXTENDED
+
+#if HAVE_UNISTD_H
+# include <unistd.h>
+#endif
+#if HAVE_SYS_TYPES_H
+# include <sys/types.h>
+#endif
 
 extern inline pid_t my_getpgid(pid_t p);
 

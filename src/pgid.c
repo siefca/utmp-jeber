@@ -8,14 +8,9 @@
  *
  */
 
-#define	_XOPEN_SOURCE
-#define	_XOPEN_SOURCE_EXTENDED
-
-#include <unistd.h>
-#include <sys/types.h>
+#include "pgid.h"
 
 inline pid_t my_getpgid(pid_t p)
 {
     return getpgid(p);
 }
-

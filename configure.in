@@ -1,61 +1,59 @@
-# -*-m4-*- Process this file with autoconf to produce a configure script.
+# Process this file with autoconf to produce a configure script.
+AC_INIT(src/utmp-jeber.h)
 
-AC_INIT(src/utmp-jeber.c)
-AM_INIT_AUTOMAKE(utmp-jeber, 1.0.6)
+PACKAGE=utmp-jeber
+VERSION=1.0.6
+BUGREPORT=siefca@gnu.org
 
+AC_CONFIG_SRCDIR([config.h.in])
+
+AM_INIT_AUTOMAKE($PACKAGE,$VERSION,$BUGREPORT)
+AM_CONFIG_HEADER([config.h])
 AM_ACLOCAL_INCLUDE(macros)
-
-AC_CANONICAL_HOST
 
 dnl Checks for programs.
 AC_PROG_CC
-AC_ISC_POSIX
-AC_PROG_MAKE_SET
-AC_PROG_LN_S
-AC_PROG_RANLIB
 AC_PROG_INSTALL
-
-# Find some more or less non-standard data types
-AC_CHECK_TYPE(u_int32_t, unsigned int)
-AC_CHECK_TYPE(u_int16_t, unsigned short int)
-AC_CHECK_TYPE(u_int8_t, unsigned char)
-
-# Find out whether we are on a big-endian system
-AC_C_BIGENDIAN
-
-case "$host" in
-  alpha-*-freebsd*)
-    CFLAGS="-g -0"
-esac
+AC_PROG_MAKE_SET
+AC_PROG_AWK
+AC_PROG_RANLIB
+AC_ISC_POSIX
+AC_PROG_LN_S
+AC_CANONICAL_HOST
 
 dnl Checks for libraries.
 AC_CHECK_LIB(util, logout)
 
 dnl Checks for header files.
+AC_HEADER_DIRENT
 AC_HEADER_STDC
-AC_CHECK_HEADERS(malloc.h sys/types.h sys/time.h unistd.h)
+AC_CHECK_HEADERS([fcntl.h \
+		  malloc.h \
+		  string.h \
+		  sys/types.h \
+		  sys/param.h \
+		  termios.h \
+		  unistd.h \
+		  utmp.h])
 
 dnl Checks for typedefs, structures, and compiler characteristics.
 AC_C_CONST
 AC_C_INLINE
 AC_TYPE_PID_T
 AC_TYPE_SIZE_T
+AC_TYPE_UID_T
 
 dnl Checks for library functions.
-AC_FUNC_ALLOCA
-AC_FUNC_MMAP
-AC_CHECK_FUNCS(getpgid getopt snprintf)
+AC_FUNC_MALLOC
+AC_FUNC_STAT
+AC_CHECK_FUNCS([getpgid getopt snprintf strchr memcpy memset])
 
 AM_CONDITIONAL(HAVE_SNPRINTF,test "x$ac_cv_func_snprintf" = "xyes")
 
-dnl export variables
+dnl Export variables
 AC_SUBST(EXTRA_SOURCES)
 
-dnl generate files dependig current configuration
-AM_CONFIG_HEADER(config.h)
-
-AC_OUTPUT([
-Makefile
-macros/Makefile
-src/Makefile
-])
+AC_CONFIG_FILES([Makefile \
+		 macros/Makefile \
+                 src/Makefile])
+AC_OUTPUT

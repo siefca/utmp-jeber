@@ -430,6 +430,9 @@ macros/macros.dep: macros/Makefile.am
 rpm: Makefile
 	$(MAKE) dist
 	rpm -ta --clean $(PACKAGE)-$(VERSION).tar.gz
+
+distpublish: Makefile
+	$(MAKE) dist
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:
