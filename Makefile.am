@@ -25,4 +25,5 @@ rpm: Makefile
 publish: Makefile
 	$(MAKE) dist
 	scp $(PACKAGE)-$(VERSION).tar.gz $(FTP_DIST) $(FTP_USER)@$(FTP_HOST):$(FTP_DIR)
-	ssh $(FTP_USER)@$(FTP_HOST) "cd $(FTP_DIR) && chmod 0644 $(PACKAGE)-$(VERSION).tar.gz $(FTP_DIST)"
+	ssh $(FTP_USER)@$(FTP_HOST) "cd $(FTP_DIR) && rm -f CURRENT_IS* current.tar.gz ; touch CURRENT_IS_$(VERSION) ; ln -s $(PACKAGE)-$(VERSION).tar.gz current.tar.gz"
+	ssh $(FTP_USER)@$(FTP_HOST) "cd $(FTP_DIR) && chmod 0644 $(PACKAGE)-$(VERSION).tar.gz $(FTP_DIST) CURRENT_IS*"
