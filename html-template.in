@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>@PACKAGE@</TITLE>
+ <meta http-equiv="content-type" content="text/html; charset=ISO-8859-2">
+ <meta name="Author" CONTENT="Pawel Wilk">
+ <meta name="Keywords" CONTENT="code, program, software, free software, siefca, kody, programy, GNU, Linux, PLD">
+ <meta name="Description" CONTENT="@PACKAGE@ - @SUMMARY@">
+ <meta name="CopyRight" CONTENT="Pawel Wilk">
+ <meta name="Create" CONTENT="10 Jan 2003">
+ <meta name="Modification" CONTENT="25 Jan 2003">
+
+ <style type="text/css" media="screen, print">
+  <!-- .nor:link { color:#010000; text-decoration: none; }
+       .nor:visited { color:#010000; text-decoration: none; }
+       .nor:hover { color:#efefef; text-decoration: none; }
+       .uszko { color:#66ff66; text-decoration: none; }
+       .cytat { font-family:"Arial CE",Arial,Times,Courier,"Courier New CE"; font-size:12pt; text-decoration: none; }
+       .men { font-family:"Lucida Console",monospace,"Courier New CE","Courier New",Fixed; color:#bbccbb; text-decoration: none; }
+       .min { color:#545454; text-decoration: none; }
+       .mon { color:#555555; text-decoration: none; }
+       .man { color:#bbccbb; text-decoration: none; }
+       .omnie { color:#eeeeee; font-family:"Arial CE",Arial,Helvetica,"Times New Roman CE"; font-size:12pt; text-decoration: none; }
+       .kropy { font-family:"Lucida Console",monospace,"Courier New CE","Courier New",Fixed; font-size:12pt; color:#667766; text-decoration: none; }
+       .opislinka { font-family:"Arial CE",Arial,Times,Courier,"Courier New CE"; font-size:12pt; color:#eeffee; text-decoration: none; }
+       a:link { color:#ffddff; text-decoration: underline; }
+       a:visited { color:#ffddff; text-decoration: underline; }
+       a:hover { color:#efefef; text-decoration: none; }
+  //-->
+ </style>
+
+</HEAD>
+
+<BODY BGCOLOR="#494949" TEXT="#f9f5ff">
+
+<table border="0" align="center">
+<tr><td>
+<pre class="men">
+    @PACKAGE@ -- @SUMMARY@
+</pre>
+<CENTER>
+<FONT COLOR="#aaccaa" FACE="Courier,Fixed,Courier New,terminal" SIZE="-2">[&#115;&#105;&#101;&#102;&#99;&#97;&#64;&#116;&#101;&#97;&#109;&#46;&#112;&#108;&#100;&#46;&#111;&#114;&#103;&#46;&#112;&#108; <B></B>]$ _</FONT>
+</CENTER>
+</td></tr>
+</table>
+
+<HR>
+
+<table width="760" border="0" cellspacing="3" cellpadding="10" align="center">
+
+<tr><td bgcolor="#404040">
+ <P CLASS="uszko">
+    DESCRIPTION
+ </P>
+ <P CLASS="cytat">
+    UTMP Jeber is a small tool which prints broken entries found in UTMP.
+    It has a few various methods of process analysis, which you can select
+    using command line arguments. It optionally removes broken entries. 
+ </P>
+</TD></TR>
+
+<TR><TD bgcolor="#404040">
+ <P CLASS="uszko">
+    NEWS
+ </P>
+ <P CLASS="cytat">
+    1.0.8 - first official release.
+ </P>
+</TD></TR>
+
+<TR><TD bgcolor="#404040">
+ <P CLASS="uszko">
+    DOWNLOAD
+ </P>
+ <P CLASS="cytat">
+    UTMP Jeber current tarball release is available at:<BR>
+    <BLOCKQUOTE>
+	-( <A HREF="@PACKAGE@-@VERSION@.tar.gz">@PACKAGE@-@VERSION@.tar.gz</A><BR>
+	-( <A HREF="ftp://ftp.pld.org.pl/software/@PACKAGE@/@PACKAGE@-@VERSION@.tar.gz">ftp://ftp.pld.org.pl/software/@PACKAGE@/@PACKAGE@-@VERSION@.tar.gz</A><BR>
+    </BLOCKQUOTE>
+ </P>
+ <P CLASS="cytat">
+    UTMP Jeber current source RPM release is available at:<BR>
+    <BLOCKQUOTE>
+	-( <A HREF="@PACKAGE@-@VERSION@-@RELEASE@.src.rpm">@PACKAGE@-@VERSION@-@RELEASE@.src.rpm</A><BR>
+	-( <A HREF="ftp://ftp.pld.org.pl/software/@PACKAGE@/@PACKAGE@-@VERSION@-@RELEASE@.src.rpm">ftp://ftp.pld.org.pl/software/@PACKAGE@/@PACKAGE@-@VERSION@-@RELEASE@.src.rpm</A><BR>
+    </BLOCKQUOTE>
+ </P>
+ <P CLASS="cytat">
+    Please browse FTP dir in order to download other releases:<BR>
+    <BLOCKQUOTE>
+	-( <A HREF="ftp://ftp.pld.org.pl/software/@PACKAGE@/">ftp://ftp.pld.org.pl/software/@PACKAGE@/</A><BR>
+    </BLOCKQUOTE>
+ </P>
+ <P CLASS="cytat">
+    Please see the list of available FTP mirrors (if you'll find the server search for sources in current/software/@PACKAGE@):
+    <BLOCKQUOTE>
+	-( <A HREF="http://www.pld.org.pl/distrib/ftp/">http://www.pld.org.pl/distrib/ftp/</A><BR>
+    </BLOCKQUOTE>
+ </P>
+</TD></TR>
+</table>
+
+<BR>&nbsp;<BR>
+<HR>
+<CENTER>
+<FONT FACE="fixed" SIZE="-2" COLOR="#ff1111">
+
+</CENTER>
+
+</BODY>
+</HTML>

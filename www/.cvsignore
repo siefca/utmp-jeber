@@ -1,0 +1,7 @@
+Makefile
+Makefile.in
+*~
+*.bak
+index.html
+*.tar.gz
+*.src.rpm
