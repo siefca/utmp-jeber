@@ -1,0 +1,127 @@
+
+Girl dumped you? Your wife leaved you? Your friend got on your nerves?
+
+You've removed their accounts and all their processes was killed. Good..
+But it scares you when their usernames are still present when you
+type 'w' or 'finger'..
+
+There is nothing easier!
+Use UTMP Jeber and once for all remove them from your system and your live!
+
+* UTMP Jeber - what is it?
+
+ It's a simple tool, which looks for a suspect UTMP database entries.
+ It has come into existance in as a result of interraction with users'
+ frustration. Users are frustrated, when they are present in UTMP
+ even they are not connected to a system. It can happend when KILL
+ is delivered to some processes (e.g screen), or when connection
+ is reset by peer.
+ 
+ Users get nervous, because it makes other users bad informed.
+ It can make them nervous on systems, which users UTMP to limit
+ maximum number of login sessions for user. Frustrated users
+ are wonted to abuse 'talk root' and 'mail root' commands,
+ and that was the main motive to write this small application.
+
+* What UTMP does?
+
+ UTMP Jeber reads proc filesystem and creates processes tree in
+ memory. The tree reflects to the current hierarchy of system
+ processes. After it creates the tree it checks any entry found
+ in UTMP against it. If it find any error it can optionally
+ remove the entry from database.
+ 
+ Jeber has a various methods for checking validity of data
+ found in UTMP. The most safe and sure are selected automaticaly.
+ 
+ To see the possible checking methods and other options just
+ type in the command line: utmp-jeber -h
+
+* Methods:
+
+ name:		l-seek
+ default:	yes
+ level:	safe
+ summary:	it checks whether login process exists
+
+-------------------------------------------------------------
+
+ name:		u-seek
+ default:	yes
+ level:		neutral
+ summary:	it checks whether any user process exists
+		
+		this method is not recommended to use
+		as an independent check, because it may
+		not indicate all broken entries
+
+-------------------------------------------------------------
+
+ name:		pgid-check
+ default:	no
+ level:		unsafe
+ summary:	it checks for existance of processes whith
+		PGID equal to PID of the login process,
+		or PID of its first child
+ 
+		this method is not recommended while
+		removing entries, because it may suggest
+		to remove good data
+
+-------------------------------------------------------------
+		
+ name:		pgid+line-check
+ default:	no
+ level:		very unsafe
+ summary:	it checks for existance of processes whith
+		PGID equal to PID of the login process,
+		or PID of its first child
+		
+		additionaly it checks whether found
+		processes have a valid terminal line
+		name (as found in UTMP)
+
+		this method is not recommended while
+		removing entries, because it may suggest
+		to remove good data
+
+-------------------------------------------------------------
+
+ name:		inherit-check
+ default:	no
+ level:		safe
+ summary:	it checks whether there are any processes,
+		which are children of the login process
+		it checks processes' inheritance path
+		to obtain parentship relations
+
+-------------------------------------------------------------
+
+ name:		inherit+line-check
+ default:	yes
+ level:		safe
+ summary:	it checks whether there are any processes,
+		which are children of the login process
+		it checks processes' inheritance path
+		to obtain parentship relations
+
+		additionaly it checks whether found
+		processes have a valid terminal line
+		name (as found in UTMP)
+
+-------------------------------------------------------------
+
+ name:		line-check
+ default:	no
+ level:		neutral
+ summary:	it check whether there are any processes,
+		which have some open descriptiors attached
+		to the valid terminal device, which name
+		is placed in UTMP entry
+
+		this method is not recommended to use
+		as an independent check, because it may
+		not indicate all broken entries
+
+-------------------------------------------------------------
+
