@@ -10,6 +10,7 @@ config.h.in
 configure
 config.log
 config.h
+stamp-h*
 *.cache
 intl
 libintl
