@@ -1,130 +1,130 @@
 
-Rzuci³a ciê dziewczyna? ¯ona odesz³a? Kumpel ciê wkurzy³?
+RzuciÅ‚a ciÄ™ dziewczyna? Å»ona odeszÅ‚a? Kumpel ciÄ™ wkurzyÅ‚?
 		
-Usun±³e¶ im konta i zabi³e¶ wszystkie ich procesy. Dobrze.
-Lecz dobija ciê, ¿e nadal ich loginy strasz±, gdy napiszesz
+UsunÄ…Å‚eÅ› im konta i zabiÅ‚eÅ› wszystkie ich procesy. Dobrze.
+Lecz dobija ciÄ™, Å¼e nadal ich loginy straszÄ…, gdy napiszesz
 'w' lub 'finger'..
 
 Nic prostszego!
-U¿yj UTMP Jebera i raz na zawsze wyj.. ich ze swego systemu i ¿ycia!
+UÅ¼yj UTMP Jebera i raz na zawsze wyj.. ich ze swego systemu i Å¼ycia!
 
 * UTMP Jeber - co to?
 
- Jest to proste narzêdzie, które wyszukuje podejrzane wpisy w pliku UTMP.
- Narzêdzie powsta³o w wyniku oddzia³ywania frustracji u¿ytkowników.
- U¿ytkownicy s± sfrustrowani, gdy po tym jak znikn± z systemu
- (np. z powodu zerwanej ³±czno¶ci lub sygna³u do procesu) s±
- nadal widoczni w systemie, chocia¿ to ca³kiem nieprawda.
+ Jest to proste narzÄ™dzie, ktÃ³re wyszukuje podejrzane wpisy w pliku UTMP.
+ NarzÄ™dzie powstaÅ‚o w wyniku oddziaÅ‚ywania frustracji uÅ¼ytkownikÃ³w.
+ UÅ¼ytkownicy sÄ… sfrustrowani, gdy po tym jak zniknÄ… z systemu
+ (np. z powodu zerwanej Å‚Ä…cznoÅ›ci lub sygnaÅ‚u do procesu) sÄ…
+ nadal widoczni w systemie, chociaÅ¼ to caÅ‚kiem nieprawda.
 
- U¿ytkownicy denerwuj± siê, poniewa¿ wprowadza to w b³±d innych
- u¿ytkowników, tak¿e niektóre systemy korzystaj± z utmp, ¿eby
- okre¶liæ liczbê maksymalnych sesji. U¿ytkownicy, którzy s±
- sfrustrowani i denerwuj± siê maj± w zwyczaju nadu¿ywaæ polecenia
- 'talk root' i/lub 'mail root' i aby temu zapobiec powsta³ ten program.
+ UÅ¼ytkownicy denerwujÄ… siÄ™, poniewaÅ¼ wprowadza to w bÅ‚Ä…d innych
+ uÅ¼ytkownikÃ³w, takÅ¼e niektÃ³re systemy korzystajÄ… z utmp, Å¼eby
+ okreÅ›liÄ‡ liczbÄ™ maksymalnych sesji. UÅ¼ytkownicy, ktÃ³rzy sÄ…
+ sfrustrowani i denerwujÄ… siÄ™ majÄ… w zwyczaju naduÅ¼ywaÄ‡ polecenia
+ 'talk root' i/lub 'mail root' i aby temu zapobiec powstaÅ‚ ten program.
 
 * Co robi UTMP Jeber?
 
- UTMP Jeber czyta sobie procfs i wytwarza w pamiêci drzewo
- odzwierciedlaj±ce hierarchiê procesów systemu. Potem analizuje
- plik UTMP i sprawdza aktualno¶æ ka¿dego znalezionego wpisu
- wzglêdem zebranych wcze¶niej informacji o procesach.
- Gdy napotka jaki¶ b³±d to zg³asza go i opcjonalnie usuwa
+ UTMP Jeber czyta sobie procfs i wytwarza w pamiÄ™ci drzewo
+ odzwierciedlajÄ…ce hierarchiÄ™ procesÃ³w systemu. Potem analizuje
+ plik UTMP i sprawdza aktualnoÅ›Ä‡ kaÅ¼dego znalezionego wpisu
+ wzglÄ™dem zebranych wczeÅ›niej informacji o procesach.
+ Gdy napotka jakiÅ› bÅ‚Ä…d to zgÅ‚asza go i opcjonalnie usuwa
  popsuty wpis z UTMP.
  
- Jeber ma kilka sposobów na sprawdzenie wa¿no¶ci informacji
- znalezionych w UTMP. Te najlepsze w praktyce s± stosowane
+ Jeber ma kilka sposobÃ³w na sprawdzenie waÅ¼noÅ›ci informacji
+ znalezionych w UTMP. Te najlepsze w praktyce sÄ… stosowane
  automatycznie.
  
- Aby zobaczyæ mo¿liwe sposoby testowania i inne opcje
- napisz w linii poleceñ: utmp-jeber -h
+ Aby zobaczyÄ‡ moÅ¼liwe sposoby testowania i inne opcje
+ napisz w linii poleceÅ„: utmp-jeber -h
 
-* Metody sprawdzania wa¿no¶ci
+* Metody sprawdzania waÅ¼noÅ›ci
 
  nazwa:		l-seek
- domy¶lnie:	tak
+ domyÅ›lnie:	tak
  poziom:	bezpieczna
  opis:		sprawdzane jest czy istnieje proces
-		loginowy, którego PID znaleziono w UTMP
+	    	loginowy, ktÃ³rego PID znaleziono w UTMP
 
 -------------------------------------------------------------
 
  nazwa:		u-seek
- domy¶lnie:	tak
+ domyÅ›lnie:	tak
  poziom:	neutralna
  opis:		sprawdzane jest czy istnieje jakikolwiek
-		proces u¿ytkownika znalezionego w UTMP
-		
-		metoda nie jest polecana jako samodzielny
-		test, poniewa¿ mo¿e nie wykazaæ b³êdnych
-		wpisów
+	        proces uÅ¼ytkownika znalezionego w UTMP
+	        
+	        metoda nie jest polecana jako samodzielny
+	        test, poniewaÅ¼ moÅ¼e nie wykazaÄ‡ bÅ‚Ä™dnych
+	        wpisÃ³w
 
 -------------------------------------------------------------
 
  nazwa:		pgid-check
- domy¶lnie:	nie
+ domyÅ›lnie:	nie
  poziom:	niebezpieczna
- opis:		sprawdzane jest czy istniej± procesy,
-		które maj± taki PGID jak PID procesu
-		loginowego wczytany z wpisu UTMP,
-		lub jak PID pierwszego jego potomka
-
-		metoda nie jest polecana, poniewa¿
-		mo¿e sugerowaæ usuniêcie poprawnych
-		wpisów
+ opis:		sprawdzane jest czy istniejÄ… procesy,
+	        ktÃ³re majÄ… taki PGID jak PID procesu
+	        loginowego wczytany z wpisu UTMP,
+	        lub jak PID pierwszego jego potomka
+           
+	        metoda nie jest polecana, poniewaÅ¼
+	        moÅ¼e sugerowaÄ‡ usuniÄ™cie poprawnych
+	        wpisÃ³w
 
 -------------------------------------------------------------
 		
  nazwa:		pgid+line-check
- domy¶lnie:	nie
+ domyÅ›lnie:	nie
  poziom:	bardzo niebezpieczna
- opis:		sprawdzane jest czy istniej± procesy,
-		które maj± taki PGID jak PID procesu
-		loginowego wczytany z wpisu UTMP,
-		lub jak PID pierwszego jego potomka,
-		a dodatkowo czy nazwa urz±dzenia
-		linii terminala zgadza siê z nazw±
-		umieszczon± we wpisie UTMP
-
-		metoda nie jest polecana, poniewa¿
-		mo¿e sugerowaæ usuniêcie poprawnych
-		wpisów
+ opis:		sprawdzane jest czy istniejÄ… procesy,
+	        ktÃ³re majÄ… taki PGID jak PID procesu
+	        loginowego wczytany z wpisu UTMP,
+	        lub jak PID pierwszego jego potomka,
+	        a dodatkowo czy nazwa urzÄ…dzenia
+	        linii terminala zgadza siÄ™ z nazwÄ…
+	        umieszczonÄ… we wpisie UTMP
+           
+	        metoda nie jest polecana, poniewaÅ¼
+	        moÅ¼e sugerowaÄ‡ usuniÄ™cie poprawnych
+	        wpisÃ³w
 
 -------------------------------------------------------------
 
  nazwa:		inherit-check
- domy¶lnie:	nie
+ domyÅ›lnie:	nie
  poziom:	bezpieczna
- opis:		sprawdzane jest czy istniej± procesy,
-		które s± potomkami procesu loginowego
-		w tym celu analizowana jest ¶cie¿ka
-		dziedziczenia procesów
+ opis:		sprawdzane jest czy istniejÄ… procesy,
+			ktÃ³re sÄ… potomkami procesu loginowego
+			w tym celu analizowana jest Å›cieÅ¼ka
+			dziedziczenia procesÃ³w
 
 -------------------------------------------------------------
 
  nazwa:		inherit+line-check
- domy¶lnie:	tak
+ domyÅ›lnie:	tak
  poziom:	bezpieczna
- opis:		sprawdzane jest czy istniej± procesy,
-		które s± potomkami procesu loginowego
-		w tym celu analizowana jest ¶cie¿ka
-		dziedziczenia procesów, dodatkowo
-		sprawdzane jest czy nazwa urz±dzenia
-		linii terminala zgadza siê z nazw±
-		umieszczon± we wpisie UTMP
+ opis:		sprawdzane jest czy istniejÄ… procesy,
+			ktÃ³re sÄ… potomkami procesu loginowego
+			w tym celu analizowana jest Å›cieÅ¼ka
+			dziedziczenia procesÃ³w, dodatkowo
+			sprawdzane jest czy nazwa urzÄ…dzenia
+			linii terminala zgadza siÄ™ z nazwÄ…
+			umieszczonÄ… we wpisie UTMP
 
 -------------------------------------------------------------
 
  nazwa:		line-check
- domy¶lnie:	nie
+ domyÅ›lnie:	nie
  poziom:	neutralna
- opis:		sprawdzane jest czy istniej± procesy,
-		których jakie¶ otwarte deskryptory s±
-		skojarzone z urz±dzeniem terminala
-		wymienionym we wpisie UTMP
- 
-		u¿ycie tylko tej metody jako jedynej
-		nie jest polecane, poniewa¿ niektóre
-		wadliwe wpisy mog± pozostaæ
+ opis:		sprawdzane jest czy istniejÄ… procesy,
+	        ktÃ³rych jakieÅ› otwarte deskryptory sÄ…
+	        skojarzone z urzÄ…dzeniem terminala
+	        wymienionym we wpisie UTMP
+           
+	        uÅ¼ycie tylko tej metody jako jedynej
+	        nie jest polecane, poniewaÅ¼ niektÃ³re
+	        wadliwe wpisy mogÄ… pozostaÄ‡
 
 -------------------------------------------------------------
 
